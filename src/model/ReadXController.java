@@ -15,9 +15,15 @@ public class ReadXController {
 	 * @param name
 	 * @param id
 	 */
-	public String RegisterUser(String name, String id) {
-		// TODO - implement ReadXController.RegisterUser
-		throw new UnsupportedOperationException();
+	public String RegisterUser(String name, String id, boolean type) {
+		for (int i = 0; i < users.length; i++) {
+			if (users[i] == null) {
+				if (type) users[i] = new PremiumUser(name, id);
+				else users[i] = new RegularUser(name, id);
+				return "User registered successfully";
+			}
+		}
+		return "Error: There is no space for more users";
 	}
 
 	/**
@@ -116,4 +122,8 @@ public class ReadXController {
 		throw new UnsupportedOperationException();
 	}
 
+	public String GenerateTestElements() {
+		// TODO - implement ReadXController.GenerateTestElements
+		throw new UnsupportedOperationException();
+	}
 }
