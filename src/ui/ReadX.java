@@ -39,7 +39,7 @@ public class ReadX {
 		String id = Utils.input.nextLine();
 		Utils.print("Premium user? Enter (y/n)");
 		boolean type = Utils.input.nextLine().equals("y");
-		controller.RegisterUser(name, id, type);
+		Utils.print(controller.RegisterUser(name, id, type));
 	}
 
 	public static void ManageProducts() {

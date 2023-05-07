@@ -12,8 +12,8 @@ public class ReadXController {
 
 	/**
 	 * 
-	 * @param name
-	 * @param id
+	 * @param name name of the user
+	 * @param id id of the user
 	 */
 	public String RegisterUser(String name, String id, boolean type) {
 		for (int i = 0; i < users.length; i++) {
@@ -28,16 +28,14 @@ public class ReadXController {
 
 	/**
 	 * 
-	 * @param id
-	 * @param name
-	 * @param pages
-	 * @param date
-	 * @param price
-	 * @param issuance_frequency
-	 * @param subscription
-	 * @param pagesRead
-	 * @param issuanceFrecuency
-	 * @param subscriptions
+	 * @param id id of the book
+	 * @param name name of the book
+	 * @param pages number of pages of the book
+	 * @param date date of publication of the book
+	 * @param price price of the book
+	 * @param pagesRead number of pages read of the book
+	 * @param issuanceFrequency frequency of issuance of the book
+	 * @param subscriptions number of subscriptions of the book
 	 */
 	public String RegisterMagazine(String id, String name, int pages, String date, int pagesRead, float price, String image, String category, int issuanceFrequency, int subscriptions) {
 		for (int i = 0; i < products.length; i++) {
@@ -51,7 +49,7 @@ public class ReadXController {
 
 	/**
 	 * 
-	 * @param bookId
+	 * @param bookId id of the book
 	 */
 	public String RemoveBook(String bookId) {
 		for (int i = 0; i < products.length; i++) {
@@ -67,7 +65,7 @@ public class ReadXController {
 
 	/**
 	 * 
-	 * @param magazineId
+	 * @param magazineId id of the magazine
 	 */
 	public String RemoveMagazine(String magazineId) {
 		for (int i = 0; i < products.length; i++) {
@@ -83,21 +81,20 @@ public class ReadXController {
 
 	/**
 	 * 
-	 * @param id
-	 * @param name
-	 * @param pages
-	 * @param date
-	 * @param image
-	 * @param price
-	 * @param sold_units
-	 * @param review
-	 * @param pages_readed
-	 * @param soldCopies
+	 * @param id id of the book
+	 * @param name name of the book
+	 * @param pages number of pages of the book
+	 * @param date date of publication of the book
+	 * @param image image url of the book
+	 * @param price price of the book
+	 * @param review review of the book
+	 * @param pagesRead number of pages read of the book
+	 * @param soldCopies number of sold copies of the book
 	 */
-	public String RegisterBook(String id, String name, int pages, String date, int pagesReaded, float price, String image, String review, String genre, int soldCopies) {
+	public String RegisterBook(String id, String name, int pages, String date, int pagesRead, float price, String image, String review, String genre, int soldCopies) {
 		for (int i = 0; i < products.length; i++) {
 			if (products[i] == null) {
-				products[i] = new Book(id, name, pages, date, pagesReaded, price, image, review, genre, soldCopies);
+				products[i] = new Book(id, name, pages, date, pagesRead, price, image, review, genre, soldCopies);
 				return "Book registered successfully";
 			}
 		}
@@ -106,8 +103,8 @@ public class ReadXController {
 
 	/**
 	 * 
-	 * @param userId
-	 * @param bookId
+	 * @param userId id of the user
+	 * @param bookId id of the book
 	 */
 	public String BuyBook(String userId, String bookId) {
 		// TODO - implement ReadXController.BuyBook
@@ -116,8 +113,8 @@ public class ReadXController {
 
 	/**
 	 * 
-	 * @param userId
-	 * @param magazineId
+	 * @param userId id of the user
+	 * @param magazineId id of the magazine
 	 */
 	public String SubscribeMagazine(String userId, String magazineId) {
 		// TODO - implement ReadXController.SubscribeMagazine
@@ -125,19 +122,19 @@ public class ReadXController {
 	}
 
 	public String ModifyMagazine(String id, String name, int pages, String date, String category, String image, float price, int issuanceFrecuency, int subscriptions, int pagesReaded) {
-		for (int i = 0; i < products.length; i++) {
-			if (products[i] instanceof Magazine) {
-				if (products[i].getId().equals(id)) {
-					products[i].setName(name);
-					products[i].setPages(pages);
-					products[i].setDate(date);
-					products[i].setPrice(price);
-					products[i].setImage(image);
-					((Magazine) products[i]).setCategory(category);
-					((Magazine) products[i]).setSubscriptions(subscriptions);
-					((Magazine) products[i]).setPagesReaded(pagesReaded);
-					((Magazine) products[i]).setIssuanceFrequency(issuanceFrecuency);
-					((Magazine) products[i]).setSubscriptions(subscriptions);
+		for (Product product : products) {
+			if (product instanceof Magazine) {
+				if (product.getId().equals(id)) {
+					product.setName(name);
+					product.setPages(pages);
+					product.setDate(date);
+					product.setPrice(price);
+					product.setImage(image);
+					product.setPagesReaded(pagesReaded);
+					((Magazine) product).setCategory(category);
+					((Magazine) product).setSubscriptions(subscriptions);
+					((Magazine) product).setIssuanceFrequency(issuanceFrecuency);
+					((Magazine) product).setSubscriptions(subscriptions);
 					return "Magazine modified successfully";
 				}
 			}
@@ -145,18 +142,19 @@ public class ReadXController {
 		return "Error: Magazine not found";
 	}
 
-	public String ModifyBook(String id, String name, int pages, String date, int pagesReaded, float price, String image, String review, String genre, int soldCopies) {
-		for (int i = 0; i < products.length; i++) {
-			if (products[i] instanceof Book) {
-				if (products[i].getId().equals(id)) {
-					products[i].setName(name);
-					products[i].setPages(pages);
-					products[i].setDate(date);
-					products[i].setPrice(price);
-					products[i].setImage(image);
-					((Book) products[i]).setGenre(genre);
-					((Book) products[i]).setSoldCopies(soldCopies);
-					((Book) products[i]).setPagesReaded(pagesReaded);
+	public String ModifyBook(String id, String name, int pages, String date, int pagesRead, float price, String image, String review, String genre, int soldCopies) {
+		for (Product product : products) {
+			if (product instanceof Book) {
+				if (product.getId().equals(id)) {
+					product.setName(name);
+					product.setPages(pages);
+					product.setDate(date);
+					product.setPagesReaded(pagesRead);
+					product.setPrice(price);
+					product.setImage(image);
+					((Book) product).setReview(review);
+					((Book) product).setGenre(genre);
+					((Book) product).setSoldCopies(soldCopies);
 					return "Book modified successfully";
 				}
 			}
@@ -174,7 +172,7 @@ public class ReadXController {
 
 	/**
 	 * 
-	 * @param productId
+	 * @param productId id of the product
 	 */
 	public Product GetProduct(String productId) {
 		// TODO - implement ReadXController.GetProduct
