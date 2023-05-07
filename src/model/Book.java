@@ -101,8 +101,8 @@ public class Book extends Product {
 	 * 
 	 * @param genre
 	 */
-	public void setGenre(TGenre genre) {
-		this.genre = genre;
+	public void setGenre(String genre) {
+		this.genre = TGenre.valueOf(genre);
 	}
 
 	public String getImage() {

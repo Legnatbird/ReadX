@@ -89,8 +89,8 @@ public class Magazine extends Product {
 	 * 
 	 * @param category
 	 */
-	public void setCategory(TCategory category) {
-		this.category = category;
+	public void setCategory(String category) {
+		this.category = TCategory.valueOf(category);
 	}
 
 	public String getImage() {

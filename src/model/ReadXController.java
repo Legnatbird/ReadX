@@ -39,9 +39,14 @@ public class ReadXController {
 	 * @param issuanceFrecuency
 	 * @param subscriptions
 	 */
-	public String RegisterMagazine(String id, String name, int pages, String date, float price, String image, String subscription, int pages_readed, int issuanceFrecuency, int subscriptions) {
-		// TODO - implement ReadXController.RegisterMagazine
-		throw new UnsupportedOperationException();
+	public String RegisterMagazine(String id, String name, int pages, String date, int pagesReaded, float price, String image, String category, int issuanceFrequency, int subscriptions) {
+		for (int i = 0; i < products.length; i++) {
+			if (products[i] == null) {
+				products[i] = new Magazine(id, name, pages, date, pagesReaded, price, image, category, issuanceFrequency, subscriptions);
+				return "Magazine registered successfully";
+			}
+		}
+		return "Error: There is no space for more magazines";
 	}
 
 	/**
@@ -49,8 +54,15 @@ public class ReadXController {
 	 * @param bookId
 	 */
 	public String RemoveBook(String bookId) {
-		// TODO - implement ReadXController.RemoveBook
-		throw new UnsupportedOperationException();
+		for (int i = 0; i < products.length; i++) {
+			if (products[i] instanceof Book) {
+				if (products[i].getId().equals(bookId)) {
+					products[i] = null;
+					return "Book removed successfully";
+				}
+			}
+		}
+		return "Error: Book not found";
 	}
 
 	/**
@@ -58,8 +70,15 @@ public class ReadXController {
 	 * @param magazineId
 	 */
 	public String RemoveMagazine(String magazineId) {
-		// TODO - implement ReadXController.RemoveMagazine
-		throw new UnsupportedOperationException();
+		for (int i = 0; i < products.length; i++) {
+			if (products[i] instanceof Magazine) {
+				if (products[i].getId().equals(magazineId)) {
+					products[i] = null;
+					return "Magazine removed successfully";
+				}
+			}
+		}
+		return "Error: Magazine not found";
 	}
 
 	/**
@@ -75,9 +94,14 @@ public class ReadXController {
 	 * @param pages_readed
 	 * @param soldCopies
 	 */
-	public String RegisterBook(String id, String name, int pages, String date, String image, float price, String review, int pages_readed, int soldCopies) {
-		// TODO - implement ReadXController.RegisterBook
-		throw new UnsupportedOperationException();
+	public String RegisterBook(String id, String name, int pages, String date, int pagesReaded, float price, String image, String review, String genre, int soldCopies) {
+		for (int i = 0; i < products.length; i++) {
+			if (products[i] == null) {
+				products[i] = new Book(id, name, pages, date, pagesReaded, price, image, review, genre, soldCopies);
+				return "Book registered successfully";
+			}
+		}
+		return "Error: There is no space for more books";
 	}
 
 	/**
@@ -98,6 +122,46 @@ public class ReadXController {
 	public String SubscribeMagazine(String userId, String magazineId) {
 		// TODO - implement ReadXController.SubscribeMagazine
 		throw new UnsupportedOperationException();
+	}
+
+	public String ModifyMagazine(String id, String name, int pages, String date, String category, String image, float price, int issuanceFrecuency, int subscriptions, int pagesReaded) {
+		for (int i = 0; i < products.length; i++) {
+			if (products[i] instanceof Magazine) {
+				if (products[i].getId().equals(id)) {
+					products[i].setName(name);
+					products[i].setPages(pages);
+					products[i].setDate(date);
+					products[i].setPrice(price);
+					products[i].setImage(image);
+					((Magazine) products[i]).setCategory(category);
+					((Magazine) products[i]).setSubscriptions(subscriptions);
+					((Magazine) products[i]).setPagesReaded(pagesReaded);
+					((Magazine) products[i]).setIssuanceFrequency(issuanceFrecuency);
+					((Magazine) products[i]).setSubscriptions(subscriptions);
+					return "Magazine modified successfully";
+				}
+			}
+		}
+		return "Error: Magazine not found";
+	}
+
+	public String ModifyBook(String id, String name, int pages, String date, int pagesReaded, float price, String image, String review, String genre, int soldCopies) {
+		for (int i = 0; i < products.length; i++) {
+			if (products[i] instanceof Book) {
+				if (products[i].getId().equals(id)) {
+					products[i].setName(name);
+					products[i].setPages(pages);
+					products[i].setDate(date);
+					products[i].setPrice(price);
+					products[i].setImage(image);
+					((Book) products[i]).setGenre(genre);
+					((Book) products[i]).setSoldCopies(soldCopies);
+					((Book) products[i]).setPagesReaded(pagesReaded);
+					return "Book modified successfully";
+				}
+			}
+		}
+		return "Error: Book not found";
 	}
 
 	public Product[] GetProducts() {

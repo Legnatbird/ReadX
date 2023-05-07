@@ -1,6 +1,7 @@
 package ui;
 
 import model.ReadXController;
+
 import java.util.Scanner;
 
 public class ReadX {
@@ -19,10 +20,10 @@ public class ReadX {
 					RegisterUser();
 					break;
 				case 2:
-					ManageBook();
+					ManageProducts();
 					break;
 				case 3:
-					ManageMagazine();
+					GenerateTestElements();
 					break;
 				case 4:
 					BuyBook();
@@ -37,7 +38,7 @@ public class ReadX {
 					ShowProducts();
 					break;
 				case 8:
-					GenerateTestElements();
+					GenerateReport();
 					break;
 				case 9:
 					print("Bye");
@@ -46,29 +47,176 @@ public class ReadX {
 					print("Invalid option");
 					break;
 			}
-		} while(option != 9);
+		} while (option != 8);
 	}
 
 	public static void RegisterUser() {
-		print("Enter your name: ");
+		print("Enter name: ");
 		String name = input.nextLine();
-		print("Enter your id: ");
+		print("Enter id: ");
 		String id = input.nextLine();
-		print("You are premium enter (y/n)");
+		print("Premium user? Enter (y/n)");
 		boolean type = input.nextLine().equals("y");
 		controller.RegisterUser(name, id, type);
 	}
 
+	public static void ManageProducts() {
+		print("1. Manage book");
+		print("2. Manage magazine");
+		int option = input.nextInt();
+		switch (option) {
+			case 1:
+				ManageBook();
+				break;
+			case 2:
+				ManageMagazine();
+				break;
+			default:
+				print("Invalid option");
+				break;
+		}
+	}
+
 	public static void ManageBook() {
-		// TODO - implement ReadX.ManageBook
-		throw new UnsupportedOperationException();
+		print("What do you want to do?");
+		print("1. Register book");
+		print("2. Remove book");
+		print("3. Modify book");
+		int option = input.nextInt();
+		String id, name, date, image, review, genre;
+		int pages, pagesReaded, soldCopies;
+		float price;
+		switch (option) {
+			case 1:
+				print("Enter id: ");
+				id = input.nextLine();
+				print("Enter name: ");
+				name = input.nextLine();
+				print("Enter pages: ");
+				pages = input.nextInt();
+				print("Enter date: ");
+				date = input.nextLine();
+				print("Enter pages readed: ");
+				pagesReaded = input.nextInt();
+				print("Enter price: ");
+				price = input.nextFloat();
+				print("Enter image: ");
+				image = input.nextLine();
+				print("Enter review: ");
+				review = input.nextLine();
+				print("Enter genre: ");
+				genre = input.nextLine();
+				print("Enter sold copies: ");
+				soldCopies = input.nextInt();
+				print(controller.RegisterBook(id, name, pages, date, pagesReaded, price, image, review, genre, soldCopies));
+				break;
+			case 2:
+				print("Enter id: ");
+				id = input.nextLine();
+				print(controller.RemoveBook(id));
+				break;
+			case 3:
+				print("Enter id: ");
+				id = input.nextLine();
+				print("Enter name: ");
+				name = input.nextLine();
+				print("Enter pages: ");
+				pages = input.nextInt();
+				print("Enter date: ");
+				date = input.nextLine();
+				print("Enter pages readed: ");
+				pagesReaded = input.nextInt();
+				print("Enter price: ");
+				price = input.nextFloat();
+				print("Enter image: ");
+				image = input.nextLine();
+				print("Enter review: ");
+				review = input.nextLine();
+				print("Enter genre: ");
+				genre = input.nextLine();
+				print("Enter sold copies: ");
+				soldCopies = input.nextInt();
+				controller.ModifyBook(id, name, pages, date, pagesReaded, price, image, review, genre, soldCopies);
+				break;
+			default:
+				print("Invalid option");
+				break;
+		}
 	}
 
 	public static void ManageMagazine() {
-		// TODO - implement ReadX.ManageMagazine
-		throw new UnsupportedOperationException();
+		print("What do you want to do?");
+		print("1. Register magazine");
+		print("2. Remove magazine");
+		print("3. Modify magazine");
+		int option = input.nextInt();
+		String id, name, date, image, category;
+		int pages, pagesReaded, issuanceFrequency, subscriptions;
+		float price;
+		switch (option) {
+			case 1:
+				print("Enter id: ");
+				id = input.nextLine();
+				print("Enter name: ");
+				name = input.nextLine();
+				print("Enter pages: ");
+				pages = input.nextInt();
+				print("Enter date: ");
+				date = input.nextLine();
+				print("Enter category: ");
+				category = input.nextLine();
+				print("Enter image: ");
+				image = input.nextLine();
+				print("Enter price: ");
+				price = input.nextFloat();
+				print("Enter Issuance frequency: ");
+				issuanceFrequency = input.nextInt();
+				print("Enter subscriptions: ");
+				subscriptions = input.nextInt();
+				print("Enter pages readed: ");
+				pagesReaded = input.nextInt();
+				controller.RegisterMagazine(id, name, pages, date, pagesReaded, price, image, category, issuanceFrequency,
+						subscriptions);
+				break;
+			case 2:
+				print("Enter id: ");
+				id = input.nextLine();
+				controller.RemoveMagazine(id);
+				break;
+			case 3:
+				print("Enter id: ");
+				id = input.nextLine();
+				print("Enter name: ");
+				name = input.nextLine();
+				print("Enter pages: ");
+				pages = input.nextInt();
+				print("Enter date: ");
+				date = input.nextLine();
+				print("Enter category: ");
+				category = input.nextLine();
+				print("Enter image: ");
+				image = input.nextLine();
+				print("Enter price: ");
+				price = input.nextFloat();
+				print("Enter Issuance frequency: ");
+				issuanceFrequency = input.nextInt();
+				print("Enter subscriptions: ");
+				subscriptions = input.nextInt();
+				print("Enter pages readed: ");
+				pagesReaded = input.nextInt();
+				controller.ModifyMagazine(id, name, pages, date, category, image, price, issuanceFrequency, subscriptions,
+						pagesReaded);
+				break;
+			default:
+				print("Invalid option");
+				break;
+		}
 	}
 
+	public static void GenerateTestElements() {
+		// TODO - implement ReadX.GenerateTestElements
+		throw new UnsupportedOperationException();
+	}
 	public static void BuyBook() {
 		// TODO - implement ReadX.BuyBook
 		throw new UnsupportedOperationException();
@@ -79,18 +227,18 @@ public class ReadX {
 		throw new UnsupportedOperationException();
 	}
 
-	public static void ShowProducts() {
-		// TODO - implement ReadX.ShowProducts
-		throw new UnsupportedOperationException();
-	}
-
 	public static void ReadingSession() {
 		// TODO - implement ReadX.ReadingSession
 		throw new UnsupportedOperationException();
 	}
 
-	public static void GenerateTestElements() {
-		// TODO - implement ReadX.GenerateTestElements
+	public static void ShowProducts() {
+		// TODO - implement ReadX.ShowProducts
+		throw new UnsupportedOperationException();
+	}
+
+	public static void GenerateReport() {
+		// TODO - implement ReadX.GenerateReport
 		throw new UnsupportedOperationException();
 	}
 

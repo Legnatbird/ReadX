@@ -69,8 +69,13 @@ public abstract class Product {
 	 * 
 	 * @param date
 	 */
-	public void setDate(Calendar date) {
-		this.date = date;
+	public void setDate(String date) {
+		// Convert String to Calendar, the format of the string is DD/MM/YYYY
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(date.substring(0, 2)));
+		cal.set(Calendar.MONTH, Integer.parseInt(date.substring(3, 5)));
+		cal.set(Calendar.YEAR, Integer.parseInt(date.substring(6, 10)));
+		this.date = cal;
 	}
 
 	public int getPagesReaded() {
