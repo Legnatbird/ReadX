@@ -35,14 +35,14 @@ public class ReadXController {
 	 * @param price
 	 * @param issuance_frequency
 	 * @param subscription
-	 * @param pages_readed
+	 * @param pagesRead
 	 * @param issuanceFrecuency
 	 * @param subscriptions
 	 */
-	public String RegisterMagazine(String id, String name, int pages, String date, int pagesReaded, float price, String image, String category, int issuanceFrequency, int subscriptions) {
+	public String RegisterMagazine(String id, String name, int pages, String date, int pagesRead, float price, String image, String category, int issuanceFrequency, int subscriptions) {
 		for (int i = 0; i < products.length; i++) {
 			if (products[i] == null) {
-				products[i] = new Magazine(id, name, pages, date, pagesReaded, price, image, category, issuanceFrequency, subscriptions);
+				products[i] = new Magazine(id, name, pages, date, pagesRead, price, image, category, issuanceFrequency, subscriptions);
 				return "Magazine registered successfully";
 			}
 		}
