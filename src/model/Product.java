@@ -8,21 +8,21 @@ public abstract class Product {
 	private String name;
 	private int pages;
 	private Calendar date;
-	private int pagesReaded;
+	private int pagesRead;
 	private float price;
 	private String image;
 
 	/**
 	 * 
-	 * @param id
-	 * @param name
-	 * @param pages
-	 * @param date
-	 * @param pagesReaded
-	 * @param price
-	 * @param image
+	 * @param id unique id of the product
+	 * @param name name of the product
+	 * @param pages number of pages of the product
+	 * @param date date of the product
+	 * @param pagesRead number of pages read of the product
+	 * @param price price of the product
+	 * @param image image of the product
 	 */
-	public Product(String id, String name, int pages, String date, int pagesReaded, float price, String image) {
+	public Product(String id, String name, int pages, String date, int pagesRead, float price, String image) {
 	}
 
 	public String getId() {
@@ -31,7 +31,7 @@ public abstract class Product {
 
 	/**
 	 * 
-	 * @param id
+	 * @param id unique id of the product
 	 */
 	public void setId(String id) {
 		this.id = id;
@@ -43,7 +43,7 @@ public abstract class Product {
 
 	/**
 	 * 
-	 * @param name
+	 * @param name name of the product
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -55,7 +55,7 @@ public abstract class Product {
 
 	/**
 	 * 
-	 * @param pages
+	 * @param pages number of pages of the product
 	 */
 	public void setPages(int pages) {
 		this.pages = pages;
@@ -67,7 +67,7 @@ public abstract class Product {
 
 	/**
 	 * 
-	 * @param date
+	 * @param date date of the product
 	 */
 	public void setDate(String date) {
 		// Convert String to Calendar, the format of the string is DD/MM/YYYY
@@ -78,16 +78,16 @@ public abstract class Product {
 		this.date = cal;
 	}
 
-	public int getPagesReaded() {
-		return this.pagesReaded;
+	public int getPagesRead() {
+		return this.pagesRead;
 	}
 
 	/**
 	 * 
-	 * @param pagesReaded
+	 * @param pagesRead number of pages read of the product
 	 */
-	public void setPagesReaded(int pagesReaded) {
-		this.pagesReaded = pagesReaded;
+	public void setPagesRead(int pagesRead) {
+		this.pagesRead = pagesRead;
 	}
 
 	public float getPrice() {
@@ -96,7 +96,7 @@ public abstract class Product {
 
 	/**
 	 * 
-	 * @param price
+	 * @param price price of the product
 	 */
 	public void setPrice(float price) {
 		this.price = price;
@@ -108,7 +108,7 @@ public abstract class Product {
 
 	/**
 	 * 
-	 * @param image
+	 * @param image image of the product
 	 */
 	public void setImage(String image) {
 		this.image = image;

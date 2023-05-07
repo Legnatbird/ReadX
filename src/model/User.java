@@ -11,8 +11,8 @@ public abstract class User {
 
 	/**
 	 * 
-	 * @param name
-	 * @param id
+	 * @param name name of the user
+	 * @param id unique id of the user
 	 */
 	public User(String name, String id) {
 		// TODO - implement User.User
@@ -29,7 +29,7 @@ public abstract class User {
 
 	/**
 	 * 
-	 * @param name
+	 * @param name name of the user
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -41,7 +41,7 @@ public abstract class User {
 
 	/**
 	 * 
-	 * @param idNumber
+	 * @param idNumber unique id of the user
 	 */
 	public void setIdNumber(String idNumber) {
 		this.idNumber = idNumber;
@@ -53,7 +53,7 @@ public abstract class User {
 
 	/**
 	 * 
-	 * @param registrationDate
+	 * @param registrationDate date of registration
 	 */
 	public void setRegistrationDate(Calendar registrationDate) {
 		this.registrationDate = registrationDate;
@@ -65,7 +65,7 @@ public abstract class User {
 
 	/**
 	 * 
-	 * @param product
+	 * @param product products bought by the user
 	 */
 	public void setProducts(Product product) {
 		// TODO - implement User.setProducts

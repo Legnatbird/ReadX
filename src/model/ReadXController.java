@@ -130,7 +130,7 @@ public class ReadXController {
 					product.setDate(date);
 					product.setPrice(price);
 					product.setImage(image);
-					product.setPagesReaded(pagesReaded);
+					product.setPagesRead(pagesReaded);
 					((Magazine) product).setCategory(category);
 					((Magazine) product).setSubscriptions(subscriptions);
 					((Magazine) product).setIssuanceFrequency(issuanceFrecuency);
@@ -149,7 +149,7 @@ public class ReadXController {
 					product.setName(name);
 					product.setPages(pages);
 					product.setDate(date);
-					product.setPagesReaded(pagesRead);
+					product.setPagesRead(pagesRead);
 					product.setPrice(price);
 					product.setImage(image);
 					((Book) product).setReview(review);

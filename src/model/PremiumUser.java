@@ -19,7 +19,7 @@ public class PremiumUser extends User {
 
 	/**
 	 * 
-	 * @param name
+	 * @param name name of the user
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -31,7 +31,7 @@ public class PremiumUser extends User {
 
 	/**
 	 * 
-	 * @param id
+	 * @param id unique id of the user
 	 */
 	public void setId(String id) {
 		this.id = id;
@@ -43,7 +43,7 @@ public class PremiumUser extends User {
 
 	/**
 	 * 
-	 * @param registrationDate
+	 * @param registrationDate date of registration
 	 */
 	public void setRegistrationDate (Calendar registrationDate) {
 		this.registrationDate = registrationDate;
@@ -55,7 +55,7 @@ public class PremiumUser extends User {
 
 	/**
 	 * 
-	 * @param product
+	 * @param product products bought by the user
 	 */
 	public void setProducts(Product product) {
 		// TODO - implement PremiumUser.setProducts

@@ -13,16 +13,16 @@ public class Book extends Product {
 	private String image;
 	private float price;
 	private int soldCopies;
-	private int pagesReaded;
+	private int pagesRead;
 
 	/**
 	 * 
-	 * @param review
-	 * @param genre
-	 * @param soldCopies
+	 * @param review short review of the book
+	 * @param genre genre of the book
+	 * @param soldCopies number of sold copies
 	 */
-	public Book(String id, String name, int pages, String date, int pagesReaded, float price, String image, String review, String genre, int soldCopies) {
-		super(id, name, pages, date, pagesReaded, price, image);
+	public Book(String id, String name, int pages, String date, int pagesRead, float price, String image, String review, String genre, int soldCopies) {
+		super(id, name, pages, date, pagesRead, price, image);
 		this.review = review;
 		this.genre = TGenre.valueOf(genre);
 		this.soldCopies = soldCopies;
@@ -39,7 +39,7 @@ public class Book extends Product {
 
 	/**
 	 * 
-	 * @param id
+	 * @param id unique id of the book
 	 */
 	public void setId(String id) {
 		this.id = id;
@@ -51,7 +51,7 @@ public class Book extends Product {
 
 	/**
 	 * 
-	 * @param name
+	 * @param name name of the book
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -63,7 +63,7 @@ public class Book extends Product {
 
 	/**
 	 * 
-	 * @param pages
+	 * @param pages number of pages of the book
 	 */
 	public void setPages(int pages) {
 		this.pages = pages;
@@ -75,7 +75,7 @@ public class Book extends Product {
 
 	/**
 	 * 
-	 * @param review
+	 * @param review short review of the book
 	 */
 	public void setReview(String review) {
 		this.review = review;
@@ -87,7 +87,7 @@ public class Book extends Product {
 
 	/**
 	 * 
-	 * @param date
+	 * @param date date of the book
 	 */
 	public void setDate(Calendar date) {
 		this.date = date;
@@ -99,7 +99,7 @@ public class Book extends Product {
 
 	/**
 	 * 
-	 * @param genre
+	 * @param genre genre of the book
 	 */
 	public void setGenre(String genre) {
 		this.genre = TGenre.valueOf(genre);
@@ -111,7 +111,7 @@ public class Book extends Product {
 
 	/**
 	 * 
-	 * @param image
+	 * @param image image of the book
 	 */
 	public void setImage(String image) {
 		this.image = image;
@@ -123,7 +123,7 @@ public class Book extends Product {
 
 	/**
 	 * 
-	 * @param soldCopies
+	 * @param soldCopies number of sold copies
 	 */
 	public void setSoldCopies(int soldCopies) {
 		this.soldCopies = soldCopies;
@@ -135,22 +135,22 @@ public class Book extends Product {
 
 	/**
 	 * 
-	 * @param price
+	 * @param price price of the book
 	 */
 	public void setPrice(float price) {
 		this.price = price;
 	}
 
-	public int getPagesReaded() {
-		return this.pagesReaded;
+	public int getPagesRead() {
+		return this.pagesRead;
 	}
 
 	/**
 	 * 
-	 * @param pagesReaded
+	 * @param pagesRead number of pages read
 	 */
-	public void setPagesReaded(int pagesReaded) {
-		this.pagesReaded = pagesReaded;
+	public void setPagesReaded(int pagesRead) {
+		this.pagesRead = pagesRead;
 	}
 
 }

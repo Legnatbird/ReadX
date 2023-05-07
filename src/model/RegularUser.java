@@ -28,7 +28,7 @@ public class RegularUser extends User implements Advertisable {
 
 	/**
 	 * 
-	 * @param name
+	 * @param name name of the user
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -40,7 +40,7 @@ public class RegularUser extends User implements Advertisable {
 
 	/**
 	 * 
-	 * @param id
+	 * @param id unique id of the user
 	 */
 	public void setId(String id) {
 		this.id = id;
@@ -52,7 +52,7 @@ public class RegularUser extends User implements Advertisable {
 
 	/**
 	 * 
-	 * @param registrationDate
+	 * @param registrationDate date of registration
 	 */
 	public void setRegistrationDate(Calendar registrationDate) {
 		this.registrationDate = registrationDate;
@@ -64,7 +64,7 @@ public class RegularUser extends User implements Advertisable {
 
 	/**
 	 * 
-	 * @param product
+	 * @param product products bought by the user
 	 */
 	public void setProducts(Product product) {
 		// TODO - implement RegularUser.setProducts
@@ -77,7 +77,7 @@ public class RegularUser extends User implements Advertisable {
 
 	/**
 	 * 
-	 * @param booksCount
+	 * @param booksCount number of books bought by the user
 	 */
 	public void setBooksCount(short booksCount) {
 		this.booksCount = booksCount;
@@ -89,7 +89,7 @@ public class RegularUser extends User implements Advertisable {
 
 	/**
 	 * 
-	 * @param magazineCount
+	 * @param magazineCount number of magazines bought by the user
 	 */
 	public void setMagazineCount(short magazineCount) {
 		this.magazineCount = magazineCount;

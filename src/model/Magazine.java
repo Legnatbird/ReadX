@@ -13,16 +13,16 @@ public class Magazine extends Product {
 	private float price;
 	private int issuanceFrequency;
 	private int subscriptions;
-	private int pagesReaded;
+	private int pagesRead;
 
 	/**
 	 * 
-	 * @param category
-	 * @param issuanceFrecuency
-	 * @param subscriptions
+	 * @param category category of the magazine
+	 * @param issuanceFrequency number of times the magazine is issued per year
+	 * @param subscriptions number of subscriptions
 	 */
-	public Magazine(String id, String name, int pages, String date, int pagesReaded, float price, String image, String category, int issuanceFrequency, int subscriptions) {
-		super(id, name, pages, date, pagesReaded, price, image);
+	public Magazine(String id, String name, int pages, String date, int pagesRead, float price, String image, String category, int issuanceFrequency, int subscriptions) {
+		super(id, name, pages, date, pagesRead, price, image);
 		this.category = TCategory.valueOf(category);
 		this.issuanceFrequency = issuanceFrequency;
 		this.subscriptions = subscriptions;
@@ -39,7 +39,7 @@ public class Magazine extends Product {
 
 	/**
 	 * 
-	 * @param id
+	 * @param id unique id of the magazine
 	 */
 	public void setId(String id) {
 		this.id = id;
@@ -51,7 +51,7 @@ public class Magazine extends Product {
 
 	/**
 	 * 
-	 * @param name
+	 * @param name name of the magazine
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -63,7 +63,7 @@ public class Magazine extends Product {
 
 	/**
 	 * 
-	 * @param pages
+	 * @param pages number of pages of the magazine
 	 */
 	public void setPages(int pages) {
 		this.pages = pages;
@@ -75,7 +75,7 @@ public class Magazine extends Product {
 
 	/**
 	 * 
-	 * @param date
+	 * @param date date of the magazine
 	 */
 	public void setDate(Calendar date) {
 		this.date = date;
@@ -87,7 +87,7 @@ public class Magazine extends Product {
 
 	/**
 	 * 
-	 * @param category
+	 * @param category category of the magazine
 	 */
 	public void setCategory(String category) {
 		this.category = TCategory.valueOf(category);
@@ -99,7 +99,7 @@ public class Magazine extends Product {
 
 	/**
 	 * 
-	 * @param image
+	 * @param image image of the magazine
 	 */
 	public void setImage(String image) {
 		this.image = image;
@@ -111,7 +111,7 @@ public class Magazine extends Product {
 
 	/**
 	 * 
-	 * @param price
+	 * @param price price of the magazine
 	 */
 	public void setPrice(float price) {
 		this.price = price;
@@ -123,7 +123,7 @@ public class Magazine extends Product {
 
 	/**
 	 * 
-	 * @param issuanceFrequency
+	 * @param issuanceFrequency number of times the magazine is issued per year
 	 */
 	public void setIssuanceFrequency(int issuanceFrequency) {
 		this.issuanceFrequency = issuanceFrequency;
@@ -135,23 +135,23 @@ public class Magazine extends Product {
 
 	/**
 	 * 
-	 * @param subscriptions
+	 * @param subscriptions number of subscriptions
 	 */
 	public void setSubscriptions(int subscriptions) {
 		this.subscriptions = subscriptions;
 	}
 
-	public int getPagesReaded() {
-		// TODO - implement Magazine.getPagesReaded
-		return this.pagesReaded;
+	public int getPagesRead() {
+		// TODO - implement Magazine.getPagesRead
+		return this.pagesRead;
 	}
 
 	/**
 	 * 
-	 * @param pagesReaded
+	 * @param pagesCount number of pages read
 	 */
-	public void setPagesReaded(int pagesCount) {
-		pagesReaded += pagesCount;
+	public void setPagesRead(int pagesCount) {
+		pagesRead += pagesCount;
 	}
 
 }
