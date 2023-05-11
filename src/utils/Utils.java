@@ -31,7 +31,7 @@ public class Utils {
     for (int i = 0; i < 5; i++) {
       users.add(new RegularUser(names.get(i), ids.get(i)));
     }
-    for (int i = 0; i < 5; i++) {
+    for (int i = 5; i < 10; i++) {
         users.add(new PremiumUser(names.get(i), ids.get(i)));
     }
     return users;
