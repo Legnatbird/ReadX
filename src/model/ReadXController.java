@@ -8,10 +8,7 @@ public class ReadXController {
 	private ArrayList<User> users;
 	private ArrayList<Product> products;
 
-	public ReadXController() {
-		// TODO - implement ReadXController.ReadXController
-		throw new UnsupportedOperationException();
-	}
+	public ReadXController() {}
 
 	/**
 	 * 
@@ -22,9 +19,9 @@ public class ReadXController {
 		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i) == null) {
 				if (type) {
-					users.set(i, new PremiumUser(name, id));
+					users.set(i, new PremiumUser(name, id, Utils.getCurrentDate()));
 				} else {
-					users.set(i, new RegularUser(name, id));
+					users.set(i, new RegularUser(name, id, Utils.getCurrentDate()));
 				}
 				return "User registered successfully";
 			}
@@ -113,8 +110,33 @@ public class ReadXController {
 	 * @param bookId id of the book
 	 */
 	public String BuyBook(String userId, String bookId) {
-		// TODO - implement ReadXController.BuyBook
-		throw new UnsupportedOperationException();
+		String regex = "^[0-9a-fA-F]+$";
+		if (!bookId.matches(regex)) {
+			return "Error: Invalid id format";
+		}
+		for (User user : users) {
+			if (user.getId().equals(userId)) {
+				if (user instanceof RegularUser) {
+					if (((RegularUser) user).getBookCount() == 5) {
+						return "Error: User has reached the maximum number of books";
+					}
+				}
+				for (Product product : products) {
+					if (product instanceof Book) {
+						if (product.getId().equals(bookId)) {
+							user.setProduct(bookId);
+							((Book) product).setSoldCopies(((Book) product).getSoldCopies() + 1);
+							if (user instanceof RegularUser) {
+								((RegularUser) user).setBookCount(((RegularUser) user).getBookCount() + 1);
+							}
+							return "Book bought successfully";
+						}
+					}
+				}
+				return "Error: Book not found";
+			}
+		}
+		return "Error: User not found";
 	}
 
 	/**
@@ -123,8 +145,29 @@ public class ReadXController {
 	 * @param magazineId id of the magazine
 	 */
 	public String SubscribeMagazine(String userId, String magazineId) {
-		// TODO - implement ReadXController.SubscribeMagazine
-		throw new UnsupportedOperationException();
+		for (User user : users) {
+			if (user.getId().equals(userId)) {
+				if (user instanceof RegularUser) {
+					if (((RegularUser) user).getMagazineCount() == 2) {
+						return "Error: User has reached the maximum number of magazines";
+					}
+				}
+				for (Product product : products) {
+					if (product instanceof Magazine) {
+						if (product.getId().equals(magazineId)) {
+							user.setProduct(magazineId);
+							((Magazine) product).setSubscriptions(((Magazine) product).getSubscriptions() + 1);
+							if (user instanceof RegularUser) {
+								((RegularUser) user).setMagazineCount(((RegularUser) user).getMagazineCount() + 1);
+							}
+							return "Magazine subscribed successfully";
+						}
+					}
+				}
+				return "Error: Magazine not found";
+			}
+		}
+		return "Error: User not found";
 	}
 
 	public String ModifyMagazine(String id, String name, int pages, String date, String category, String image, float price, int issuanceFrequency, int subscriptions, int pagesRead) {

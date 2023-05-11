@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 
 import model.PremiumUser;
@@ -29,11 +30,15 @@ public class Utils {
     //use names and ids to create users array using the User class constructor
     ArrayList<User> users = new ArrayList<User>();
     for (int i = 0; i < 5; i++) {
-      users.add(new RegularUser(names.get(i), ids.get(i)));
+      users.add(new RegularUser(names.get(i), ids.get(i), Calendar.getInstance()));
     }
     for (int i = 5; i < 10; i++) {
-        users.add(new PremiumUser(names.get(i), ids.get(i)));
+        users.add(new PremiumUser(names.get(i), ids.get(i), Calendar.getInstance()));
     }
     return users;
+  }
+
+  public static Calendar getCurrentDate() {
+    return Calendar.getInstance();
   }
 }

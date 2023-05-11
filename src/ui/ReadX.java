@@ -104,17 +104,22 @@ public class ReadX {
 	}
 
 	public static void GenerateTestElements() {
-		// TODO - implement ReadX.GenerateTestElements
-		throw new UnsupportedOperationException();
+		Utils.print(controller.GenerateTestElements());
 	}
 	public static void BuyBook() {
-		// TODO - implement ReadX.BuyBook
-		throw new UnsupportedOperationException();
+		Utils.print("Enter user id: ");
+		String id = Utils.input.nextLine();
+		Utils.print("Enter book id: ");
+		String bookId = Utils.input.nextLine();
+		Utils.print(controller.BuyBook(id, bookId));
 	}
 
 	public static void SubscribeMagazine() {
-		// TODO - implement ReadX.SubscribeMagazine
-		throw new UnsupportedOperationException();
+		Utils.print("Enter user id: ");
+		String id = Utils.input.nextLine();
+		Utils.print("Enter magazine id: ");
+		String magazineId = Utils.input.nextLine();
+		Utils.print(controller.SubscribeMagazine(id, magazineId));
 	}
 
 	public static void ReadingSession() {

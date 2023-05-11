@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class RegularUser extends User implements Advertisable {
@@ -7,14 +8,14 @@ public class RegularUser extends User implements Advertisable {
 	private String name;
 	private String id;
 	private Calendar registrationDate;
-	private Product[] products;
-	private short booksCount;
-	private short magazineCount;
+	private ArrayList<String> products;
+	private int booksCount;
+	private int magazineCount;
 
-	public RegularUser(String name, String id) {
-		// TODO - implement RegularUser.RegularUser
-		super(name, id);
-		throw new UnsupportedOperationException();
+	public RegularUser(String name, String id, Calendar registrationDate) {
+		this.name = name;
+		this.id = id;
+		this.registrationDate = registrationDate;
 	}
 
 	public String showAds() {
@@ -58,20 +59,19 @@ public class RegularUser extends User implements Advertisable {
 		this.registrationDate = registrationDate;
 	}
 
-	public Product[] getProducts() {
+	public ArrayList<String> getProducts() {
 		return this.products;
 	}
 
 	/**
 	 * 
-	 * @param product products bought by the user
+	 * @param productId products bought by the user
 	 */
-	public void setProducts(Product product) {
-		// TODO - implement RegularUser.setProducts
-		throw new UnsupportedOperationException();
+	public void setProduct(String productId) {
+		this.products.add(productId);
 	}
 
-	public short getBooksCount() {
+	public int getBookCount() {
 		return this.booksCount;
 	}
 
@@ -79,11 +79,11 @@ public class RegularUser extends User implements Advertisable {
 	 * 
 	 * @param booksCount number of books bought by the user
 	 */
-	public void setBooksCount(short booksCount) {
+	public void setBookCount(int booksCount) {
 		this.booksCount = booksCount;
 	}
 
-	public short getMagazineCount() {
+	public int getMagazineCount() {
 		return this.magazineCount;
 	}
 
@@ -91,7 +91,7 @@ public class RegularUser extends User implements Advertisable {
 	 * 
 	 * @param magazineCount number of magazines bought by the user
 	 */
-	public void setMagazineCount(short magazineCount) {
+	public void setMagazineCount(int magazineCount) {
 		this.magazineCount = magazineCount;
 	}
 

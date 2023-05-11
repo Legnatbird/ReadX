@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class PremiumUser extends User {
@@ -7,10 +8,12 @@ public class PremiumUser extends User {
 	private String name;
 	private String id;
 	private Calendar registrationDate;
-	private Product[] products;
+	private ArrayList<String> products;
 
-	public PremiumUser(String name, String id) {
-		super(name, id);
+	public PremiumUser(String name, String id, Calendar registrationDate) {
+		this.name = name;
+		this.id = id;
+		this.registrationDate = registrationDate;
 	}
 
 	public String getName() {
@@ -49,17 +52,16 @@ public class PremiumUser extends User {
 		this.registrationDate = registrationDate;
 	}
 
-	public Product[] getProducts() {
+	public ArrayList<String> getProducts() {
 		return this.products;
 	}
 
 	/**
 	 * 
-	 * @param product products bought by the user
+	 * @param productId products bought by the user
 	 */
-	public void setProducts(Product product) {
-		// TODO - implement PremiumUser.setProducts
-		throw new UnsupportedOperationException();
+	public void setProduct(String productId) {
+		this.products.add(productId);
 	}
 
 }

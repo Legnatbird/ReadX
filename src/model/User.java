@@ -1,75 +1,41 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public abstract class User {
+	public User(){};
 
-	private String name;
-	private String idNumber;
-	private Calendar registrationDate;
-	private Product[] products;
-
-	/**
-	 * 
-	 * @param name name of the user
-	 * @param id unique id of the user
-	 */
-	public User(String name, String id) {
-		// TODO - implement User.User
-		this.name = name;
-		this.idNumber = id;
-		this.registrationDate = Calendar.getInstance();
-		
-		throw new UnsupportedOperationException();
-	}
-
-	public String getName() {
-		return this.name;
-	}
+	public abstract String getName();
 
 	/**
 	 * 
 	 * @param name name of the user
 	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+	public abstract void setName(String name);
 
-	public String getIdNumber() {
-		return this.idNumber;
-	}
+	public abstract String getId();
 
 	/**
 	 * 
 	 * @param idNumber unique id of the user
 	 */
-	public void setIdNumber(String idNumber) {
-		this.idNumber = idNumber;
-	}
+	public abstract void setId(String idNumber);
 
-	public Calendar getRegistrationDate() {
-		return this.registrationDate;
-	}
+	public abstract Calendar getRegistrationDate();
 
 	/**
 	 * 
 	 * @param registrationDate date of registration
 	 */
-	public void setRegistrationDate(Calendar registrationDate) {
-		this.registrationDate = registrationDate;
-	}
+	public abstract void setRegistrationDate(Calendar registrationDate);
 
-	public Product[] getProducts() {
-		return this.products;
-	}
+	public abstract ArrayList<String> getProducts();
 
 	/**
 	 * 
-	 * @param product products bought by the user
+	 * @param productId product bought by the user
 	 */
-	public void setProducts(Product product) {
-		// TODO - implement User.setProducts
-		throw new UnsupportedOperationException();
-	}
+	public abstract void setProduct(String productId);
 
 }
