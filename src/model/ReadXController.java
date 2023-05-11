@@ -1,9 +1,12 @@
 package model;
 
+import java.util.ArrayList;
+import utils.Utils;
+
 public class ReadXController {
 
-	private User[] users;
-	private Product[] products;
+	private ArrayList<User> users;
+	private ArrayList<Product> products;
 
 	public ReadXController() {
 		// TODO - implement ReadXController.ReadXController
@@ -16,10 +19,13 @@ public class ReadXController {
 	 * @param id id of the user
 	 */
 	public String RegisterUser(String name, String id, boolean type) {
-		for (int i = 0; i < users.length; i++) {
-			if (users[i] == null) {
-				if (type) users[i] = new PremiumUser(name, id);
-				else users[i] = new RegularUser(name, id);
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i) == null) {
+				if (type) {
+					users.set(i, new PremiumUser(name, id));
+				} else {
+					users.set(i, new RegularUser(name, id));
+				}
 				return "User registered successfully";
 			}
 		}
@@ -38,9 +44,9 @@ public class ReadXController {
 	 * @param subscriptions number of subscriptions of the book
 	 */
 	public String RegisterMagazine(String id, String name, int pages, String date, int pagesRead, float price, String image, String category, int issuanceFrequency, int subscriptions) {
-		for (int i = 0; i < products.length; i++) {
-			if (products[i] == null) {
-				products[i] = new Magazine(id, name, pages, date, pagesRead, price, image, category, issuanceFrequency, subscriptions);
+		for (int i = 0; i < products.size(); i++) {
+			if (products.get(i) == null) {
+				products.set(i, new Magazine(id, name, pages, date, pagesRead, price, image, category, issuanceFrequency, subscriptions));
 				return "Magazine registered successfully";
 			}
 		}
@@ -52,10 +58,10 @@ public class ReadXController {
 	 * @param bookId id of the book
 	 */
 	public String RemoveBook(String bookId) {
-		for (int i = 0; i < products.length; i++) {
-			if (products[i] instanceof Book) {
-				if (products[i].getId().equals(bookId)) {
-					products[i] = null;
+		for (int i = 0; i < products.size(); i++) {
+			if (products.get(i) instanceof Book) {
+				if (products.get(i).getId().equals(bookId)) {
+					products.set(i, null);
 					return "Book removed successfully";
 				}
 			}
@@ -68,10 +74,10 @@ public class ReadXController {
 	 * @param magazineId id of the magazine
 	 */
 	public String RemoveMagazine(String magazineId) {
-		for (int i = 0; i < products.length; i++) {
-			if (products[i] instanceof Magazine) {
-				if (products[i].getId().equals(magazineId)) {
-					products[i] = null;
+		for (int i = 0; i < products.size(); i++) {
+			if (products.get(i) instanceof Magazine) {
+				if (products.get(i).getId().equals(magazineId)) {
+					products.set(i, null);
 					return "Magazine removed successfully";
 				}
 			}
@@ -92,9 +98,9 @@ public class ReadXController {
 	 * @param soldCopies number of sold copies of the book
 	 */
 	public String RegisterBook(String id, String name, int pages, String date, int pagesRead, float price, String image, String review, String genre, int soldCopies) {
-		for (int i = 0; i < products.length; i++) {
-			if (products[i] == null) {
-				products[i] = new Book(id, name, pages, date, pagesRead, price, image, review, genre, soldCopies);
+		for (int i = 0; i < products.size(); i++) {
+			if (products.get(i) == null) {
+				products.set(i, new Book(id, name, pages, date, pagesRead, price, image, review, genre, soldCopies));
 				return "Book registered successfully";
 			}
 		}
@@ -121,7 +127,7 @@ public class ReadXController {
 		throw new UnsupportedOperationException();
 	}
 
-	public String ModifyMagazine(String id, String name, int pages, String date, String category, String image, float price, int issuanceFrecuency, int subscriptions, int pagesReaded) {
+	public String ModifyMagazine(String id, String name, int pages, String date, String category, String image, float price, int issuanceFrequency, int subscriptions, int pagesRead) {
 		for (Product product : products) {
 			if (product instanceof Magazine) {
 				if (product.getId().equals(id)) {
@@ -130,10 +136,10 @@ public class ReadXController {
 					product.setDate(date);
 					product.setPrice(price);
 					product.setImage(image);
-					product.setPagesRead(pagesReaded);
+					product.setPagesRead(pagesRead);
 					((Magazine) product).setCategory(category);
 					((Magazine) product).setSubscriptions(subscriptions);
-					((Magazine) product).setIssuanceFrequency(issuanceFrecuency);
+					((Magazine) product).setIssuanceFrequency(issuanceFrequency);
 					((Magazine) product).setSubscriptions(subscriptions);
 					return "Magazine modified successfully";
 				}
@@ -162,11 +168,11 @@ public class ReadXController {
 		return "Error: Book not found";
 	}
 
-	public Product[] GetProducts() {
+	public ArrayList<Product> GetProducts() {
 		return this.products;
 	}
 
-	public User[] GetUsers() {
+	public ArrayList<User> GetUsers() {
 		return this.users;
 	}
 
@@ -185,7 +191,13 @@ public class ReadXController {
 	}
 
 	public String GenerateTestElements() {
-		// TODO - implement ReadXController.GenerateTestElements
-		throw new UnsupportedOperationException();
+		for (int i = 0; i < 10; i++) {
+			products.set(i, new Book("Book" + i, "Book" + i, 100, "01/01/2000", 0, 10, "image", "review", "genre", 0));
+		}
+		for (int i = 10; i < 20; i++) {
+			products.set(i, new Magazine("Magazine" + i, "Magazine" + i, 100, "01/01/2000", 0, 10, "image", "category", 0, 0));
+		}
+		users = Utils.getUsers();
+		return "Test elements generated successfully";
 	}
 }

@@ -1,6 +1,5 @@
 package utils;
 
-import ui.ReadX;
 
 import static utils.BasicInfo.getBasicInfo;
 
