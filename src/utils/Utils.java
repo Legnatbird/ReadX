@@ -16,8 +16,8 @@ public class Utils {
 
   public static ArrayList<User> getUsers() {
     String[] data = Fetch.getData();
-    ArrayList<String> names = new ArrayList<String>();
-    ArrayList<String> ids = new ArrayList<String>();
+    ArrayList<String> names = new ArrayList<>();
+    ArrayList<String> ids = new ArrayList<>();
 
     for (int i = 0; i < data.length; i++) {
       if (data[i].equals("firstName")) {
@@ -28,7 +28,7 @@ public class Utils {
       }
     }
     //use names and ids to create users array using the User class constructor
-    ArrayList<User> users = new ArrayList<User>();
+    ArrayList<User> users = new ArrayList<>();
     for (int i = 0; i < 5; i++) {
       users.add(new RegularUser(names.get(i), ids.get(i), Calendar.getInstance()));
     }

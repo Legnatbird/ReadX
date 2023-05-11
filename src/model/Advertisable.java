@@ -2,6 +2,6 @@ package model;
 
 public interface Advertisable {
 
-	String showAds();
+  String showAds();
 
 }
