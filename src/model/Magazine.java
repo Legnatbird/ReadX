@@ -4,33 +4,22 @@ import java.util.Calendar;
 
 public class Magazine extends Product {
 
-  private String id;
-  private String name;
-  private int pages;
-  private Calendar date;
   private TCategory category;
-  private String image;
-  private float price;
   private int issuanceFrequency;
   private int subscriptions;
-  private int pagesRead;
 
   /**
    *
-   * @param category category of the magazine
+   * @param category          category of the magazine
    * @param issuanceFrequency number of times the magazine is issued per year
-   * @param subscriptions number of subscriptions
+   * @param subscriptions     number of subscriptions
    */
-  public Magazine(String id, String name, int pages, String date, int pagesRead, float price, String image, String category, int issuanceFrequency, int subscriptions) {
+  public Magazine(String id, String name, int pages, String date, int pagesRead, float price, String image,
+      String category, int issuanceFrequency, int subscriptions) {
     super(id, name, pages, date, pagesRead, price, image);
     this.category = TCategory.valueOf(category);
     this.issuanceFrequency = issuanceFrequency;
     this.subscriptions = subscriptions;
-  }
-
-  public void subscribe() {
-    // TODO - implement Magazine.subscribe
-    throw new UnsupportedOperationException();
   }
 
   public String getId() {
@@ -71,6 +60,10 @@ public class Magazine extends Product {
 
   public Calendar getDate() {
     return this.date;
+  }
+
+  public Calendar setDate(String date) {
+    return getCalendar(date);
   }
 
   /**
@@ -152,6 +145,26 @@ public class Magazine extends Product {
    */
   public void setPagesRead(int pagesCount) {
     pagesRead += pagesCount;
+  }
+
+  @Override
+  public String toString() {
+    String day = String.valueOf(date.get(Calendar.DAY_OF_MONTH));
+    String month = String.valueOf(date.get(Calendar.MONTH) + 1);
+    String year = String.valueOf(date.get(Calendar.YEAR));
+    String printDate = day + "/" + month + "/" + year;
+    return "Magazine{" +
+        "id='" + id + '\'' +
+        ", name='" + name + '\'' +
+        ", pages=" + pages +
+        ", date=" + printDate +
+        ", category=" + category +
+        ", image='" + image + '\'' +
+        ", price=" + price +
+        ", issuanceFrequency=" + issuanceFrequency +
+        ", subscriptions=" + subscriptions +
+        ", pagesRead=" + pagesRead +
+        '}';
   }
 
 }

@@ -3,34 +3,26 @@ package model;
 import java.util.Calendar;
 
 public class Book extends Product {
-
-  private String id;
-  private String name;
-  private int pages;
   private String review;
-  private Calendar date;
   private TGenre genre;
-  private String image;
-  private float price;
   private int soldCopies;
-  private int pagesRead;
 
   /**
    *
-   * @param review short review of the book
-   * @param genre genre of the book
+   * @param review     short review of the book
+   * @param genre      genre of the book
    * @param soldCopies number of sold copies
    */
-  public Book(String id, String name, int pages, String date, int pagesRead, float price, String image, String review, String genre, int soldCopies) {
+  public Book(String id, String name, int pages, String date, int pagesRead, float price, String image, String review,
+      String genre, int soldCopies) {
     super(id, name, pages, date, pagesRead, price, image);
     this.review = review;
     this.genre = TGenre.valueOf(genre);
     this.soldCopies = soldCopies;
   }
 
-  public void sell() {
-    // TODO - implement Book.sell
-    throw new UnsupportedOperationException();
+  public Calendar setDate(String date) {
+    return getCalendar(date);
   }
 
   public String getId() {
@@ -149,8 +141,27 @@ public class Book extends Product {
    *
    * @param pagesRead number of pages read
    */
-  public void setPagesReaded(int pagesRead) {
+  public void setPagesRead(int pagesRead) {
     this.pagesRead = pagesRead;
   }
 
+  @Override
+  public String toString() {
+    String day = String.valueOf(date.get(Calendar.DAY_OF_MONTH));
+    String month = String.valueOf(date.get(Calendar.MONTH) + 1);
+    String year = String.valueOf(date.get(Calendar.YEAR));
+    String printDate = day + "/" + month + "/" + year;
+    return "Book{" +
+        "id='" + id + '\'' +
+        ", name='" + name + '\'' +
+        ", pages=" + pages +
+        ", review='" + review + '\'' +
+        ", date=" + printDate +
+        ", genre=" + genre +
+        ", image='" + image + '\'' +
+        ", price=" + price +
+        ", soldCopies=" + soldCopies +
+        ", pagesRead=" + pagesRead +
+        '}';
+  }
 }

@@ -1,19 +1,21 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Random;
 import utils.Utils;
 
 public class ReadXController {
 
-  private ArrayList<User> users;
-  private ArrayList<Product> products;
+  private ArrayList<User> users = new ArrayList<>();
+  private final ArrayList<Product> products = new ArrayList<>();
 
-  public ReadXController() {}
+  public ReadXController() {
+  }
 
   /**
    *
    * @param name name of the user
-   * @param id id of the user
+   * @param id   id of the user
    */
   public String RegisterUser(String name, String id, boolean type) {
     for (int i = 0; i < users.size(); i++) {
@@ -31,19 +33,21 @@ public class ReadXController {
 
   /**
    *
-   * @param id id of the book
-   * @param name name of the book
-   * @param pages number of pages of the book
-   * @param date date of publication of the book
-   * @param price price of the book
-   * @param pagesRead number of pages read of the book
+   * @param id                id of the book
+   * @param name              name of the book
+   * @param pages             number of pages of the book
+   * @param date              date of publication of the book
+   * @param price             price of the book
+   * @param pagesRead         number of pages read of the book
    * @param issuanceFrequency frequency of issuance of the book
-   * @param subscriptions number of subscriptions of the book
+   * @param subscriptions     number of subscriptions of the book
    */
-  public String RegisterMagazine(String id, String name, int pages, String date, int pagesRead, float price, String image, String category, int issuanceFrequency, int subscriptions) {
+  public String RegisterMagazine(String id, String name, int pages, String date, int pagesRead, float price,
+      String image, String category, int issuanceFrequency, int subscriptions) {
     for (int i = 0; i < products.size(); i++) {
       if (products.get(i) == null) {
-        products.set(i, new Magazine(id, name, pages, date, pagesRead, price, image, category, issuanceFrequency, subscriptions));
+        products.set(i,
+            new Magazine(id, name, pages, date, pagesRead, price, image, category, issuanceFrequency, subscriptions));
         return "Magazine registered successfully";
       }
     }
@@ -84,17 +88,18 @@ public class ReadXController {
 
   /**
    *
-   * @param id id of the book
-   * @param name name of the book
-   * @param pages number of pages of the book
-   * @param date date of publication of the book
-   * @param image image url of the book
-   * @param price price of the book
-   * @param review review of the book
-   * @param pagesRead number of pages read of the book
+   * @param id         id of the book
+   * @param name       name of the book
+   * @param pages      number of pages of the book
+   * @param date       date of publication of the book
+   * @param image      image url of the book
+   * @param price      price of the book
+   * @param review     review of the book
+   * @param pagesRead  number of pages read of the book
    * @param soldCopies number of sold copies of the book
    */
-  public String RegisterBook(String id, String name, int pages, String date, int pagesRead, float price, String image, String review, String genre, int soldCopies) {
+  public String RegisterBook(String id, String name, int pages, String date, int pagesRead, float price, String image,
+      String review, String genre, int soldCopies) {
     for (int i = 0; i < products.size(); i++) {
       if (products.get(i) == null) {
         products.set(i, new Book(id, name, pages, date, pagesRead, price, image, review, genre, soldCopies));
@@ -110,10 +115,6 @@ public class ReadXController {
    * @param bookId id of the book
    */
   public String BuyBook(String userId, String bookId) {
-    String regex = "^[0-9a-fA-F]+$";
-    if (!bookId.matches(regex)) {
-      return "Error: Invalid id format";
-    }
     for (User user : users) {
       if (user.getId().equals(userId)) {
         if (user instanceof RegularUser) {
@@ -126,9 +127,6 @@ public class ReadXController {
             if (product.getId().equals(bookId)) {
               user.setProduct(bookId);
               ((Book) product).setSoldCopies(((Book) product).getSoldCopies() + 1);
-              if (user instanceof RegularUser) {
-                ((RegularUser) user).setBookCount(((RegularUser) user).getBookCount() + 1);
-              }
               return "Book bought successfully";
             }
           }
@@ -141,7 +139,7 @@ public class ReadXController {
 
   /**
    *
-   * @param userId id of the user
+   * @param userId     id of the user
    * @param magazineId id of the magazine
    */
   public String SubscribeMagazine(String userId, String magazineId) {
@@ -170,7 +168,8 @@ public class ReadXController {
     return "Error: User not found";
   }
 
-  public String ModifyMagazine(String id, String name, int pages, String date, String category, String image, float price, int issuanceFrequency, int subscriptions, int pagesRead) {
+  public String ModifyMagazine(String id, String name, int pages, String date, String category, String image,
+      float price, int issuanceFrequency, int subscriptions, int pagesRead) {
     for (Product product : products) {
       if (product instanceof Magazine) {
         if (product.getId().equals(id)) {
@@ -191,7 +190,8 @@ public class ReadXController {
     return "Error: Magazine not found";
   }
 
-  public String ModifyBook(String id, String name, int pages, String date, int pagesRead, float price, String image, String review, String genre, int soldCopies) {
+  public String ModifyBook(String id, String name, int pages, String date, int pagesRead, float price, String image,
+      String review, String genre, int soldCopies) {
     for (Product product : products) {
       if (product instanceof Book) {
         if (product.getId().equals(id)) {
@@ -211,11 +211,11 @@ public class ReadXController {
     return "Error: Book not found";
   }
 
-  public ArrayList<Product> GetProducts() {
+  public ArrayList<Product> getProducts() {
     return this.products;
   }
 
-  public ArrayList<User> GetUsers() {
+  public ArrayList<User> getUsers() {
     return this.users;
   }
 
@@ -223,9 +223,13 @@ public class ReadXController {
    *
    * @param productId id of the product
    */
-  public Product GetProduct(String productId) {
-    // TODO - implement ReadXController.GetProduct
-    throw new UnsupportedOperationException();
+  public Product getProduct(String productId) {
+    for (Product product : products) {
+      if (product.getId().equals(productId)) {
+        return product;
+      }
+    }
+    return null;
   }
 
   public Book getBook(String bookId) {
@@ -266,32 +270,46 @@ public class ReadXController {
 
   public String GenerateTestElements() {
     for (int i = 0; i < 10; i++) {
-      products.set(i, new Book("Book" + i, "Book" + i, 100, "01/01/2000", 0, 10, "image", "review", "genre", 0));
+      products.add(i, new Book(GenRandomHex(), "Book" + i, 100, "01/01/2000", 0, 10, "image", "review", "FANTASY", 0));
     }
     for (int i = 10; i < 20; i++) {
-      products.set(i, new Magazine("Magazine" + i, "Magazine" + i, 100, "01/01/2000", 0, 10, "image", "category", 0, 0));
+      products.add(i, new Magazine("Magazine" + i, "Magazine" + i, 100, "01/01/2000", 0, 10, "image", "VARIETY", 0, 0));
     }
     users = Utils.getUsers();
     return "Test elements generated successfully";
   }
 
-  public Book ReadingBook(String bookId, String userId) {
+  public String ShowUsers() {
+    StringBuilder result = new StringBuilder();
     for (User user : users) {
-      if (user.getId().equals(userId)) {
-        if (user instanceof RegularUser) {
-          ArrayList<String> books = ((RegularUser) user).getProducts();
-          for (String book : books) {
-            if (book.equals(bookId)) {
-              for (Product product : products) {
-                if (product.getId().equals(bookId)) {
-                  return (Book) product;
-                }
-              }
-            }
-          }
-        }
+      result.append(user.toString()).append("\n");
+    }
+    return result.toString();
+  }
+
+  public String ShowBooks() {
+    StringBuilder result = new StringBuilder();
+    for (Product product : products) {
+      if (product instanceof Book) {
+        result.append(product.toString()).append("\n");
       }
     }
-    return null;
+    return result.toString();
+  }
+
+  public String ShowMagazines() {
+    StringBuilder result = new StringBuilder();
+    for (Product product : products) {
+      if (product instanceof Magazine) {
+        result.append(product.toString()).append("\n");
+      }
+    }
+    return result.toString();
+  }
+
+  private String GenRandomHex() {
+    Random rand = new Random();
+    int randomNumber = rand.nextInt(0xFFF + 1);
+    return Integer.toHexString(randomNumber);
   }
 }

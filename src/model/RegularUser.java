@@ -5,16 +5,16 @@ import java.util.Calendar;
 
 public class RegularUser extends User implements Advertisable {
 
-  private String name;
   private String id;
+  private String name;
   private Calendar registrationDate;
-  private ArrayList<String> products;
+  private final ArrayList<String> products = new ArrayList<>();
   private int booksCount;
   private int magazineCount;
 
-  public RegularUser(String name, String id, Calendar registrationDate) {
-    this.name = name;
+  public RegularUser(String id, String name, Calendar registrationDate) {
     this.id = id;
+    this.name = name;
     this.registrationDate = registrationDate;
   }
 
@@ -69,6 +69,7 @@ public class RegularUser extends User implements Advertisable {
    */
   public void setProduct(String productId) {
     this.products.add(productId);
+    setBookCount(getBookCount() + 1);
   }
 
   public int getBookCount() {
@@ -93,6 +94,21 @@ public class RegularUser extends User implements Advertisable {
    */
   public void setMagazineCount(int magazineCount) {
     this.magazineCount = magazineCount;
+  }
+
+  @Override
+  public String toString() {
+
+    String day = String.valueOf(registrationDate.get(Calendar.DAY_OF_MONTH));
+    String month = String.valueOf(registrationDate.get(Calendar.MONTH) + 1);
+    String year = String.valueOf(registrationDate.get(Calendar.YEAR));
+    String date = day + "/" + month + "/" + year;
+    return "name='" + name + '\'' +
+        ", id='" + id + '\'' +
+        ", registrationDate=" + date +
+        ", products=" + products +
+        ", booksCount=" + booksCount +
+        ", magazineCount=" + magazineCount;
   }
 
 }

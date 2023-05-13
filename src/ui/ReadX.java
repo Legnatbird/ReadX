@@ -1,22 +1,23 @@
 package ui;
 
 import model.ReadXController;
-import utils.*;
-
-import static utils.MagazineInfo.getMagazineInfo;
-import static utils.BookInfo.getBookInfo;
-
+import java.util.Scanner;
 
 public class ReadX {
 
   private static final ReadXController controller = new ReadXController();
+  public static final Scanner input = new Scanner(System.in);
+
+  public static void print(Object uwu) {
+    System.out.println(uwu);
+  }
 
   public static void main(String[] args) {
     int option;
     do {
-      Utils.print("Welcome to ReadX");
+      print("Welcome to ReadX");
       Menu();
-      option = Utils.input.nextInt();
+      option = input.nextInt();
       switch (option) {
         case 1 -> RegisterUser();
         case 2 -> ManageProducts();
@@ -25,139 +26,234 @@ public class ReadX {
         case 5 -> SubscribeMagazine();
         case 6 -> ReadingSession();
         case 7 -> ShowProducts();
-        case 8 -> GenerateReport();
-        case 9 -> Utils.print("Bye");
-        default -> Utils.print("Invalid option");
+        case 8 -> ShowUsers();
+        case 9 -> GenerateReport();
+        case 10 -> print("Bye");
+        default -> print("Invalid option");
       }
-    } while (option != 9);
+    } while (option != 10);
   }
 
   public static void RegisterUser() {
-    Utils.print("Enter name: ");
-    String name = Utils.input.nextLine();
-    Utils.print("Enter id: ");
-    String id = Utils.input.nextLine();
-    Utils.print("Premium user? Enter (y/n)");
-    boolean type = Utils.input.nextLine().equals("y");
-    Utils.print(controller.RegisterUser(name, id, type));
+    print("Enter name: ");
+    input.nextLine();
+    String name = input.nextLine();
+    print("Enter id: ");
+    String id = input.nextLine();
+    print("Premium user? Enter (y/n)");
+    boolean type = input.nextLine().equals("y");
+    print(controller.RegisterUser(name, id, type));
   }
 
   public static void ManageProducts() {
-    Utils.print("1. Manage book");
-    Utils.print("2. Manage magazine");
-    int option = Utils.input.nextInt();
+    print("1. Manage book");
+    print("2. Manage magazine");
+    int option = input.nextInt();
     switch (option) {
       case 1 -> ManageBook();
       case 2 -> ManageMagazine();
-      default -> Utils.print("Invalid option");
+      default -> print("Invalid option");
     }
   }
 
   public static void ManageBook() {
-    Utils.print("What do you want to do?");
-    Utils.print("1. Register book");
-    Utils.print("2. Remove book");
-    Utils.print("3. Modify book");
-    int option = Utils.input.nextInt();
+    print("What do you want to do?");
+    print("1. Register book");
+    print("2. Remove book");
+    print("3. Modify book");
+    int option = input.nextInt();
     switch (option) {
       case 1 -> {
-        BookInfo info = getBookInfo();
-        Utils.print(controller.RegisterBook(info.id(), info.name(), info.pages(), info.date(), info.pagesRead(), info.price(), info.image(), info.review(), info.genre(), info.soldCopies()));
+        String id, name, date;
+        print("Enter id: ");
+        id = ValidateProductId();
+        print("Enter name: ");
+        name = input.nextLine();
+        print("Enter number of pages: ");
+        int pages = input.nextInt();
+        print("Enter date: ");
+        date = input.nextLine();
+        print("Enter number of pages read: ");
+        int pagesRead = input.nextInt();
+        print("Enter price: ");
+        float price = input.nextFloat();
+        print("Enter image url: ");
+        String image = input.nextLine();
+        print("Enter review: ");
+        String review = input.nextLine();
+        print("Enter genre: ");
+        String genre = input.nextLine();
+        print("Enter sold copies: ");
+        int soldCopies = input.nextInt();
+        print(controller.RegisterBook(id, name, pages, date, pagesRead, price, image, review, genre, soldCopies));
       }
       case 2 -> {
-        Utils.print("Enter id: ");
-        String id = Utils.input.nextLine();
-        Utils.print(controller.RemoveBook(id));
+        print("Enter id: ");
+        String id = input.nextLine();
+        print(controller.RemoveBook(id));
       }
       case 3 -> {
-        BookInfo info = getBookInfo();
-        Utils.print(controller.ModifyBook(info.id(), info.name(), info.pages(), info.date(), info.pagesRead(), info.price(), info.image(), info.review(), info.genre(), info.soldCopies()));
+        String id, name, date;
+        int pages, pagesRead, soldCopies;
+        float price;
+        print("Enter id: ");
+        id = ValidateProductId();
+        print("Enter name: ");
+        name = input.nextLine();
+        print("Enter number of pages: ");
+        pages = input.nextInt();
+        print("Enter date: ");
+        date = input.nextLine();
+        print("Enter number of pages read: ");
+        pagesRead = input.nextInt();
+        print("Enter price: ");
+        price = input.nextFloat();
+        print("Enter image url: ");
+        String image = input.nextLine();
+        print("Enter review: ");
+        String review = input.nextLine();
+        print("Enter genre: ");
+        String genre = input.nextLine();
+        print("Enter sold copies: ");
+        soldCopies = input.nextInt();
+        print(controller.ModifyBook(id, name, pages, date, pagesRead, price, image, review, genre, soldCopies));
       }
-      default -> Utils.print("Invalid option");
+      default -> print("Invalid option");
     }
   }
 
   public static void ManageMagazine() {
-    Utils.print("What do you want to do?");
-    Utils.print("1. Register magazine");
-    Utils.print("2. Remove magazine");
-    Utils.print("3. Modify magazine");
-    int option = Utils.input.nextInt();
+    print("What do you want to do?");
+    print("1. Register magazine");
+    print("2. Remove magazine");
+    print("3. Modify magazine");
+    int option = input.nextInt();
     switch (option) {
       case 1 -> {
-        MagazineInfo info = getMagazineInfo();
-        Utils.print(controller.RegisterMagazine(info.id(), info.name(), info.pages(), info.date(), info.pagesRead(), info.price(), info.image(), info.category(), info.issuanceFrequency(),
-            info.subscriptions()));
+        String id, name, date, category, image;
+        int pages, issuanceFrequency, subscriptions, pagesRead;
+        float price;
+        print("Enter id: ");
+        id = input.nextLine();
+        print("Enter name: ");
+        name = input.nextLine();
+        print("Enter number of pages: ");
+        pages = input.nextInt();
+        print("Enter date: ");
+        date = input.nextLine();
+        print("Enter price: ");
+        price = input.nextFloat();
+        print("Enter category: ");
+        category = input.nextLine();
+        print("Enter image: ");
+        image = input.nextLine();
+        print("Enter Issuance frequency: ");
+        issuanceFrequency = input.nextInt();
+        print("Enter subscriptions: ");
+        subscriptions = input.nextInt();
+        print("Enter pages read: ");
+        pagesRead = input.nextInt();
+        print(controller.RegisterMagazine(id, name, pages, date, pagesRead, price, image, category, issuanceFrequency,
+            subscriptions));
       }
       case 2 -> {
-        Utils.print("Enter id: ");
-        String id = Utils.input.nextLine();
-        Utils.print(controller.RemoveMagazine(id));
+        print("Enter id: ");
+        String id = input.nextLine();
+        print(controller.RemoveMagazine(id));
       }
       case 3 -> {
-        MagazineInfo result = getMagazineInfo();
-        Utils.print(controller.ModifyMagazine(result.id(), result.name(), result.pages(), result.date(), result.category(), result.image(), result.price(), result.issuanceFrequency(), result.subscriptions(),
-            result.pagesRead()));
+        String id, name, date, category, image;
+        int pages, issuanceFrequency, subscriptions, pagesRead;
+        float price;
+        print("Enter id: ");
+        id = input.nextLine();
+        print("Enter name: ");
+        name = input.nextLine();
+        print("Enter number of pages: ");
+        pages = input.nextInt();
+        print("Enter date: ");
+        date = input.nextLine();
+        print("Enter price: ");
+        price = input.nextFloat();
+        print("Enter category: ");
+        category = input.nextLine();
+        print("Enter image: ");
+        image = input.nextLine();
+        print("Enter Issuance frequency: ");
+        issuanceFrequency = input.nextInt();
+        print("Enter subscriptions: ");
+        subscriptions = input.nextInt();
+        print("Enter pages read: ");
+        pagesRead = input.nextInt();
+        print(controller.ModifyMagazine(id, name, pages, date, category, image, price, issuanceFrequency, subscriptions,
+            pagesRead));
       }
-      default -> Utils.print("Invalid option");
+      default -> print("Invalid option");
     }
   }
 
   public static void GenerateTestElements() {
-    Utils.print(controller.GenerateTestElements());
+    print(controller.GenerateTestElements());
   }
+
   public static void BuyBook() {
-    Utils.print("Enter user id: ");
-    String id = Utils.input.nextLine();
-    Utils.print("Enter book id: ");
-    String bookId = Utils.input.nextLine();
-    Utils.print(controller.BuyBook(id, bookId));
+    print("Enter user id: ");
+    input.nextLine();
+    String userId = input.nextLine();
+    print("Enter book id: ");
+    String bookId = ValidateProductId();
+    print(controller.BuyBook(userId, bookId));
   }
 
   public static void SubscribeMagazine() {
-    Utils.print("Enter user id: ");
-    String id = Utils.input.nextLine();
-    Utils.print("Enter magazine id: ");
-    String magazineId = Utils.input.nextLine();
-    Utils.print(controller.SubscribeMagazine(id, magazineId));
+    print("Enter user id: ");
+    input.nextLine();
+    String id = input.nextLine();
+    print("Enter magazine id: ");
+    String magazineId = input.nextLine();
+    print(controller.SubscribeMagazine(id, magazineId));
   }
 
   public static void ReadingSession() {
-    Utils.print("Enter user id: ");
-    String id = Utils.input.nextLine();
+    String id, productId, name;
+    int pages, pagesRead;
+    print("Enter user id: ");
+    input.nextLine();
+    id = input.nextLine();
     if (controller.getUser(id) == null) {
-      Utils.print("User not found");
+      print("User not found");
       return;
     }
-    Utils.print("Enter book id: ");
-    String bookId = Utils.input.nextLine();
-    if (controller.getBook(bookId) == null) {
-      Utils.print("Book not found");
+    print("Enter book or magazine id: ");
+    productId = ValidateProductId();
+    if (controller.getProduct(productId) == null) {
+      print("Product not found");
       return;
     }
-    int pages = controller.getBook(bookId).getPages();
-    int pagesRead = 0;
+    name = controller.getProduct(productId).getName();
+    pages = controller.getProduct(productId).getPages();
+    pagesRead = 0;
     do {
-      ReadMenu(bookId);
-      String option = Utils.input.nextLine();
+      ReadMenu(name, pages, pagesRead);
+      String option = input.nextLine().toUpperCase();
       switch (option) {
         case "A" -> {
           if (pagesRead < 1) {
-            Utils.print("You can't go back");
+            print("You can't go back");
             break;
           }
           pagesRead--;
         }
         case "S" -> {
           if (pagesRead == pages) {
-            Utils.print("You can't go forward");
+            print("You can't go forward");
             break;
           }
           pagesRead++;
         }
         case "B" -> {
-          Utils.print("Reading session finished");
-          controller.getBook(bookId).setPagesRead(pagesRead);
+          print("Reading session finished");
+          controller.getBook(productId).setPagesRead(pagesRead);
           return;
         }
       }
@@ -165,8 +261,14 @@ public class ReadX {
   }
 
   public static void ShowProducts() {
-    // TODO - implement ReadX.ShowProducts
-    throw new UnsupportedOperationException();
+    print("1. Show books");
+    print("2. Show magazines");
+    int option = input.nextInt();
+    switch (option) {
+      case 1 -> print(controller.ShowBooks());
+      case 2 -> print(controller.ShowMagazines());
+      default -> print("Invalid option");
+    }
   }
 
   public static void GenerateReport() {
@@ -175,23 +277,39 @@ public class ReadX {
   }
 
   public static void Menu() {
-    Utils.print("1. Register User");
-    Utils.print("2. Manage Products");
-    Utils.print("3. Generate test elements");
-    Utils.print("4. Buy a book");
-    Utils.print("5. Subscribe to a magazine");
-    Utils.print("6. Read a book");
-    Utils.print("7. Show products");
-    Utils.print("8. Generate reports");
-    Utils.print("9. Exit");
+    print("1. Register User");
+    print("2. Manage Products");
+    print("3. Generate test elements");
+    print("4. Buy a book");
+    print("5. Subscribe to a magazine");
+    print("6. Read a product");
+    print("7. Show products");
+    print("8. Show user");
+    print("9. Generate reports");
+    print("10. Exit");
   }
 
-  public static void ReadMenu(String bookId) {
-    Utils.print("Reading session in progress:");
-    Utils.print("Reading: " + controller.getBook(bookId).getName());
-    Utils.print("Reading page " + controller.getBook(bookId).getPagesRead() + " of " + controller.getBook(bookId).getPages());
-    Utils.print("Type A to go to the previous page");
-    Utils.print("Type S to go to the next page");
-    Utils.print("Type B to return to the library");
+  public static void ShowUsers() {
+    print(controller.ShowUsers());
   }
+
+  public static void ReadMenu(String bookName, int pages, int pagesRead) {
+    print("Reading session in progress:");
+    print("Reading: " + bookName);
+    print("Reading page " + pagesRead + " of " + pages);
+    print("Type A to go to the previous page");
+    print("Type S to go to the next page");
+    print("Type B to return to the library");
+  }
+
+  public static String ValidateProductId() {
+    String regex = "^[0-9a-fA-F]+$";
+    String bookId = input.nextLine();
+    if (!bookId.matches(regex)) {
+      print("Invalid id, remember that it must be a hexadecimal");
+      return ValidateProductId();
+    }
+    return bookId;
+  }
+
 }

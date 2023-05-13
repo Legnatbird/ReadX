@@ -2,18 +2,12 @@ package utils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Scanner;
 
 import model.PremiumUser;
 import model.RegularUser;
 import model.User;
 
 public class Utils {
-  public static final Scanner input = new Scanner(System.in);
-  public static void print(Object uwu) {
-    System.out.println(uwu);
-  }
-
   public static ArrayList<User> getUsers() {
     String[] data = Fetch.getData();
     ArrayList<String> names = new ArrayList<>();
@@ -24,16 +18,15 @@ public class Utils {
         names.add(data[i + 2]);
       }
       if (data[i].equals("id")) {
-        ids.add(data[i + 2]);
+        ids.add(data[i + 2].substring(20, 24));
       }
     }
-    //use names and ids to create users array using the User class constructor
     ArrayList<User> users = new ArrayList<>();
     for (int i = 0; i < 5; i++) {
-      users.add(new RegularUser(names.get(i), ids.get(i), Calendar.getInstance()));
+      users.add(new RegularUser(ids.get(i), names.get(i), Calendar.getInstance()));
     }
     for (int i = 5; i < 10; i++) {
-        users.add(new PremiumUser(names.get(i), ids.get(i), Calendar.getInstance()));
+      users.add(new PremiumUser(ids.get(i), names.get(i), Calendar.getInstance()));
     }
     return users;
   }

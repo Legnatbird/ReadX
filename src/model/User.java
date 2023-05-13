@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public abstract class User {
-  public User(){};
+  public User() {
+  };
 
   public abstract String getName();
 
