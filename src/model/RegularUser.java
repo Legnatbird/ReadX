@@ -5,12 +5,18 @@ import java.util.Calendar;
 
 public class RegularUser extends User implements Advertisable {
 
+  private final ArrayList<String> products = new ArrayList<>();
   private String id;
   private String name;
   private Calendar registrationDate;
-  private final ArrayList<String> products = new ArrayList<>();
   private int booksCount;
   private int magazineCount;
+  private final String[] ads = {
+    "Subscribe to Combo Plus and get Disney+ and Star+ at an incredible price!",
+    "Now your pets have a favorite app: Laika. The best products for your furry friend.",
+    "It's our anniversary! Visit your nearest Éxito and be surprised with the best offers."
+};
+    
 
   public RegularUser(String id, String name, Calendar registrationDate) {
     this.id = id;
@@ -19,8 +25,8 @@ public class RegularUser extends User implements Advertisable {
   }
 
   public String showAds() {
-    // TODO - implement RegularUser.showAds
-    throw new UnsupportedOperationException();
+    int random = (int) (Math.random() * 3);
+    return ads[random];
   }
 
   public String getName() {

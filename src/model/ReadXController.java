@@ -254,13 +254,13 @@ public class ReadXController {
     return null;
   }
 
-  public User getUser(String userId) {
-    for (User user : users) {
-      if (user.getId().equals(userId)) {
-        return user;
+  public int getUser(String userId) {
+    for (int i = 0; i < users.size(); i++) {
+      if (users.get(i).getId().equals(userId)) {
+        return i;
       }
     }
-    return null;
+    return -1;
   }
 
   public String GenerateReport() {
@@ -295,6 +295,14 @@ public class ReadXController {
       }
     }
     return result.toString();
+  }
+
+  public boolean Advertisable(int userIndex) {
+    return users.get(userIndex) instanceof RegularUser;
+  }
+
+  public RegularUser getRegularUser(int userIndex) {
+    return (RegularUser) users.get(userIndex);
   }
 
   public String ShowMagazines() {

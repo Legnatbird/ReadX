@@ -135,7 +135,6 @@ public class Magazine extends Product {
   }
 
   public int getPagesRead() {
-    // TODO - implement Magazine.getPagesRead
     return this.pagesRead;
   }
 

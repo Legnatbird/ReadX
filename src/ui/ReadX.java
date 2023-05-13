@@ -216,13 +216,19 @@ public class ReadX {
 
   public static void ReadingSession() {
     String id, productId, name;
-    int pages, pagesRead;
+    int pages, pagesRead, userIndex;
+    boolean ads = false;
     print("Enter user id: ");
     input.nextLine();
     id = input.nextLine();
-    if (controller.getUser(id) == null) {
+    userIndex = controller.getUser(id);
+    if (userIndex == -1) {
       print("User not found");
       return;
+    }
+    if (controller.Advertisable(userIndex)) {
+      print("You should watch ads in your reading session");
+      ads = true;
     }
     print("Enter book or magazine id: ");
     productId = ValidateProductId();
@@ -235,6 +241,9 @@ public class ReadX {
     pagesRead = 0;
     do {
       ReadMenu(name, pages, pagesRead);
+      if ((ads) && (pagesRead > 0) && (pagesRead % 20 == 0)) {
+        print(controller.getRegularUser(userIndex).showAds());
+      }
       String option = input.nextLine().toUpperCase();
       switch (option) {
         case "A" -> {
