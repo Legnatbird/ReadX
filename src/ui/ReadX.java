@@ -3,15 +3,37 @@ package ui;
 import model.ReadXController;
 import java.util.Scanner;
 
+/**
+ * 
+ * Class that represents the main class of the program
+ */
 public class ReadX {
 
+  /**
+   * 
+   * Controller of the program
+   */
   private static final ReadXController controller = new ReadXController();
+  /**
+   * 
+   * Scanner for get the user input
+   */
   public static final Scanner input = new Scanner(System.in);
 
+  /**
+   * 
+   * My classic print method uwu
+   * @param uwu object to print
+   */
   public static void print(Object uwu) {
     System.out.println(uwu);
   }
 
+  /**
+   * 
+   * Menu of the program
+   * @param args arguments of the program (in this case, none)
+   */
   public static void main(String[] args) {
     int option;
     do {
@@ -34,6 +56,10 @@ public class ReadX {
     } while (option != 10);
   }
 
+  /**
+   * 
+   * Register a new user in the system
+   */
   public static void RegisterUser() {
     print("Enter name: ");
     input.nextLine();
@@ -45,6 +71,10 @@ public class ReadX {
     print(controller.RegisterUser(name, id, type));
   }
 
+  /**
+   * 
+   * Manage the products in the system (books and magazines)
+   */
   public static void ManageProducts() {
     print("1. Manage book");
     print("2. Manage magazine");
@@ -56,6 +86,10 @@ public class ReadX {
     }
   }
 
+  /**
+   * 
+   * Manage books, register, remove or modify
+   */
   public static void ManageBook() {
     print("What do you want to do?");
     print("1. Register book");
@@ -122,6 +156,10 @@ public class ReadX {
     }
   }
 
+  /**
+   * 
+   * Manage magazines, register, remove or modify
+   */
   public static void ManageMagazine() {
     print("What do you want to do?");
     print("1. Register magazine");
@@ -192,10 +230,18 @@ public class ReadX {
     }
   }
 
+  /**
+   * 
+   * Generate test elements for the program
+   */
   public static void GenerateTestElements() {
     print(controller.GenerateTestElements());
   }
 
+  /**
+   * 
+   * Buy a book from the store
+   */
   public static void BuyBook() {
     print("Enter user id: ");
     input.nextLine();
@@ -205,6 +251,10 @@ public class ReadX {
     print(controller.BuyBook(userId, bookId));
   }
 
+  /**
+   * 
+   * Subscrito to a magazine
+   */
   public static void SubscribeMagazine() {
     print("Enter user id: ");
     input.nextLine();
@@ -214,6 +264,10 @@ public class ReadX {
     print(controller.SubscribeMagazine(id, magazineId));
   }
 
+  /**
+   * 
+   * Simulation of a reading session
+   */
   public static void ReadingSession() {
     String id, productId, name;
     int pages, pagesRead, userIndex;
@@ -269,6 +323,10 @@ public class ReadX {
     } while (true);
   }
 
+  /**
+   * 
+   * Show the products in the store
+   */
   public static void ShowProducts() {
     print("1. Show books");
     print("2. Show magazines");
@@ -280,11 +338,19 @@ public class ReadX {
     }
   }
 
+  /**
+   * 
+   * Show the reports of the program
+   */
   public static void GenerateReport() {
     // TODO - implement ReadX.GenerateReport
     throw new UnsupportedOperationException();
   }
 
+  /**
+   * 
+   * The menu of the program
+   */
   public static void Menu() {
     print("1. Register User");
     print("2. Manage Products");
@@ -298,10 +364,21 @@ public class ReadX {
     print("10. Exit");
   }
 
+  /**
+   * 
+   * Show the users in the program
+   */
   public static void ShowUsers() {
     print(controller.ShowUsers());
   }
 
+  /**
+   * 
+   * Reading session menu
+   * @param bookName the name of the book
+   * @param pages the number of pages of the book
+   * @param pagesRead the number of pages read
+   */
   public static void ReadMenu(String bookName, int pages, int pagesRead) {
     print("Reading session in progress:");
     print("Reading: " + bookName);
@@ -311,6 +388,12 @@ public class ReadX {
     print("Type B to return to the library");
   }
 
+  /**
+   * 
+   * Validate the id of a book or magazine
+   * 
+   * @return the id of the product
+   */
   public static String ValidateProductId() {
     String regex = "^[0-9a-fA-F]+$";
     String bookId = input.nextLine();

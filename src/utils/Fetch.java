@@ -4,7 +4,21 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.http.*;
 
+/**
+ * 
+ * Class that fetches data from the dummy api.
+ */
 public class Fetch {
+  /**
+   * 
+   * constructor of the fetch class
+   */
+  public Fetch(){}
+  /**
+   * 
+   * Method that fetches data from the dummy api.
+   * @return data from the dummy api
+   */
   public static String[] getData() {
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create("https://dummyapi.io/data/v1/user?limit=10"))

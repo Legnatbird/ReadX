@@ -7,7 +7,22 @@ import model.PremiumUser;
 import model.RegularUser;
 import model.User;
 
+/**
+ * 
+ * Class that represents a utility class.
+ */
 public class Utils {
+  /**
+   * 
+   * constructor of the utils class
+   */
+  public Utils() {}
+
+  /**
+   * 
+   * method for get users from the api
+   * @return users from the api
+   */
   public static ArrayList<User> getUsers() {
     String[] data = Fetch.getData();
     ArrayList<String> names = new ArrayList<>();
@@ -31,6 +46,11 @@ public class Utils {
     return users;
   }
 
+  /**
+   * 
+   * method for get current date
+   * @return current date
+   */
   public static Calendar getCurrentDate() {
     return Calendar.getInstance();
   }
