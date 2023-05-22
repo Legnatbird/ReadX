@@ -413,6 +413,53 @@ public class ReadXController {
 
   /**
    * 
+   * This method return all the products of the user
+   * @param userId id of the user
+   * @return a string with all the products of the user
+   */
+  public String ShowUserProducts(String userId, int page) {
+    StringBuilder result = new StringBuilder();
+    int userIndex = getUser(userId);
+    if (userIndex == -1) {
+      return "Error: User not found";
+    }
+
+    User user = users.get(userIndex);
+    if (user.getProducts().isEmpty()) {
+      return "Error: User has no products";
+    }
+
+    int start = (page - 1) * 25;
+    int end = page * 25;
+
+    if (end > user.getProducts().size()) {
+      end = user.getProducts().size();
+    }
+
+    for (int i = start; i < end; i++) {
+      if (i % 5 == 0) {
+        result.append("\n");
+      }
+      if (user.getProducts().get(i).equals("")) {
+        result.append("____").append(" | ");
+      } else {
+        result.append(user.getProducts().get(i)).append(" | ");
+      }
+      result.append(user.getProducts().get(i)).append(" | ");
+    }
+    result.append("\n");
+    result.append("Type the x,y coordinate or the corresponding code of the bibliographic product to start a reading session.");
+    result.append("\n");
+    result.append("Type A to go to the previous page");
+    result.append("\n");
+    result.append("Type S to go to the next page");
+    result.append("\n");
+    result.append("Type B to exit");
+    return result.toString();
+  }
+
+  /**
+   * 
    * This methods return if the user can see the ads or not
    * @param userIndex index of the user on the ArrayList
    * @return true if the user can see the ads, false if not

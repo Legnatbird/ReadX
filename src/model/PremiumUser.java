@@ -12,7 +12,7 @@ public class PremiumUser extends User {
   private String name;
   private String id;
   private Calendar registrationDate;
-  private ArrayList<String> products = new ArrayList<>();
+  private final ArrayList<String> products = new ArrayList<>();
 
   /**
    * constructor of the premium user class
