@@ -2,7 +2,7 @@ package model;
 
 import java.util.Calendar;
 
-// TODO Implement comparable interface
+// TODO Implement comparable interface and override compareTo method
 
 /**
  * 
