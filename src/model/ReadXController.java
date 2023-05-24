@@ -454,9 +454,10 @@ public class ReadXController {
 
     int start = (page - 1) * 25;
     int end = page * 25;
+    int productSize = user.getProducts().size();
 
-    if (end > user.getProducts().size()) {
-      end = user.getProducts().size();
+    if (end > productSize) {
+      end = productSize;
     }
 
     for (int i = start; i < end; i++) {

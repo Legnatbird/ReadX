@@ -2,6 +2,8 @@ package model;
 
 import java.util.Calendar;
 
+// TODO Implement comparable interface
+
 /**
  * 
  * Class that represents a product.
