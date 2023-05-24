@@ -8,7 +8,7 @@ import java.util.Calendar;
  * 
  * Class that represents a product.
  */
-public abstract class Product {
+public abstract class Product implements Comparable<Product> {
   /**
    * id of the product
    */
@@ -41,13 +41,14 @@ public abstract class Product {
   /**
    * 
    * constructor of the product class
-   * @param id id of the product
-   * @param name name of the product
-   * @param pages number of pages of the product
-   * @param date date of the product
+   * 
+   * @param id        id of the product
+   * @param name      name of the product
+   * @param pages     number of pages of the product
+   * @param date      date of the product
    * @param pagesRead number of pages read of the product
-   * @param price price of the product
-   * @param image image of the product
+   * @param price     price of the product
+   * @param image     image of the product
    */
   public Product(String id, String name, int pages, String date, int pagesRead, float price, String image) {
     this.id = id;
@@ -62,6 +63,7 @@ public abstract class Product {
   /**
    *
    * getter for id
+   * 
    * @return id String
    */
   public abstract String getId();
@@ -69,6 +71,7 @@ public abstract class Product {
   /**
    *
    * setter for id
+   * 
    * @param id unique id of the product
    */
   public abstract void setId(String id);
@@ -76,6 +79,7 @@ public abstract class Product {
   /**
    * 
    * getter for name
+   * 
    * @return name of the product
    */
   public abstract String getName();
@@ -83,6 +87,7 @@ public abstract class Product {
   /**
    *
    * setter for name
+   * 
    * @param name name of the product
    */
   public abstract void setName(String name);
@@ -90,6 +95,7 @@ public abstract class Product {
   /**
    *
    * number of pages of the product
+   * 
    * @return number of pages of the product
    */
   public abstract int getPages();
@@ -97,6 +103,7 @@ public abstract class Product {
   /**
    *
    * setter for pages
+   * 
    * @param pages number of pages of the product
    */
   public abstract void setPages(int pages);
@@ -104,6 +111,7 @@ public abstract class Product {
   /**
    *
    * getter for date
+   * 
    * @return date of the product
    */
   public abstract Calendar getDate();
@@ -111,6 +119,7 @@ public abstract class Product {
   /**
    *
    * setter for date
+   * 
    * @param date date of the product
    * @return Calendar object
    */
@@ -119,6 +128,7 @@ public abstract class Product {
   /**
    *
    * getter for pages read
+   * 
    * @return number of pages read of the product
    */
   public abstract int getPagesRead();
@@ -126,6 +136,7 @@ public abstract class Product {
   /**
    *
    * setter for pages read
+   * 
    * @param pagesCount number of pages read of the product
    */
   public abstract void setPagesRead(int pagesCount);
@@ -133,6 +144,7 @@ public abstract class Product {
   /**
    *
    * getter for price
+   * 
    * @return price of the product
    */
   public abstract float getPrice();
@@ -140,6 +152,7 @@ public abstract class Product {
   /**
    *
    * setter for price
+   * 
    * @param price price of the product
    */
   public abstract void setPrice(float price);
@@ -147,6 +160,7 @@ public abstract class Product {
   /**
    *
    * getter for image
+   * 
    * @return image of the product
    */
   public abstract String getImage();
@@ -154,13 +168,31 @@ public abstract class Product {
   /**
    *
    * setter for image
+   * 
    * @param image image of the product
    */
   public abstract void setImage(String image);
 
   /**
+   * 
+   * comparable method for sorting
+   * 
+   * @param product product to compare
+   * @return int value
+   */
+  @Override
+  public int compareTo(Product product) {
+    return this.date.compareTo(product.date);
+  }
+
+  public int compareTo(Product product, String sortBy) {
+    return this.pagesRead - product.pagesRead;
+  }
+
+  /**
    *
    * getter for calendar
+   * 
    * @param date date of the product
    * @return Calendar object
    */

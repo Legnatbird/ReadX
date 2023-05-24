@@ -15,6 +15,7 @@ public class Magazine extends Product {
   /**
    *
    * constructor of the magazine class
+   * 
    * @param id                id of the magazine
    * @param name              name of the magazine
    * @param pages             number of pages of the magazine
@@ -37,6 +38,7 @@ public class Magazine extends Product {
   /**
    * 
    * getter for id
+   * 
    * @return id String
    */
   public String getId() {
@@ -46,6 +48,7 @@ public class Magazine extends Product {
   /**
    *
    * setter for id
+   * 
    * @param id unique id of the magazine
    */
   public void setId(String id) {
@@ -55,6 +58,7 @@ public class Magazine extends Product {
   /**
    * 
    * getter for name
+   * 
    * @return name of the magazine
    */
   public String getName() {
@@ -64,6 +68,7 @@ public class Magazine extends Product {
   /**
    *
    * setter for name
+   * 
    * @param name name of the magazine
    */
   public void setName(String name) {
@@ -73,6 +78,7 @@ public class Magazine extends Product {
   /**
    * 
    * getter for pages
+   * 
    * @return number of pages of the magazine
    */
   public int getPages() {
@@ -82,6 +88,7 @@ public class Magazine extends Product {
   /**
    *
    * setter for pages
+   * 
    * @param pages number of pages of the magazine
    */
   public void setPages(int pages) {
@@ -91,6 +98,7 @@ public class Magazine extends Product {
   /**
    * 
    * getter for date
+   * 
    * @return date of the magazine
    */
   public Calendar getDate() {
@@ -100,6 +108,7 @@ public class Magazine extends Product {
   /**
    * 
    * setter for date
+   * 
    * @param date date of the magazine
    * @return date of the magazine
    */
@@ -110,6 +119,7 @@ public class Magazine extends Product {
   /**
    *
    * setter for date
+   * 
    * @param date date of the magazine
    */
   public void setDate(Calendar date) {
@@ -119,6 +129,7 @@ public class Magazine extends Product {
   /**
    * 
    * getter for category
+   * 
    * @return category of the magazine
    */
   public TCategory getCategory() {
@@ -128,6 +139,7 @@ public class Magazine extends Product {
   /**
    *
    * setter for category
+   * 
    * @param category category of the magazine
    */
   public void setCategory(String category) {
@@ -137,6 +149,7 @@ public class Magazine extends Product {
   /**
    * 
    * getter for pagesRead
+   * 
    * @return image of the magazine
    */
   public String getImage() {
@@ -146,6 +159,7 @@ public class Magazine extends Product {
   /**
    *
    * setter for image
+   * 
    * @param image image of the magazine
    */
   public void setImage(String image) {
@@ -155,6 +169,7 @@ public class Magazine extends Product {
   /**
    * 
    * getter for pagesRead
+   * 
    * @return price of the magazine
    */
   public float getPrice() {
@@ -164,6 +179,7 @@ public class Magazine extends Product {
   /**
    *
    * setter for price
+   * 
    * @param price price of the magazine
    */
   public void setPrice(float price) {
@@ -173,6 +189,7 @@ public class Magazine extends Product {
   /**
    * 
    * getter for pagesRead
+   * 
    * @return number of times the magazine is issued per year
    */
   public int getIssuanceFrequency() {
@@ -182,6 +199,7 @@ public class Magazine extends Product {
   /**
    *
    * setter for issuanceFrequency
+   * 
    * @param issuanceFrequency number of times the magazine is issued per year
    */
   public void setIssuanceFrequency(int issuanceFrequency) {
@@ -191,6 +209,7 @@ public class Magazine extends Product {
   /**
    * 
    * getter for subscriptions
+   * 
    * @return number of subscriptions
    */
   public int getSubscriptions() {
@@ -200,6 +219,7 @@ public class Magazine extends Product {
   /**
    *
    * setter for subscriptions
+   * 
    * @param subscriptions number of subscriptions
    */
   public void setSubscriptions(int subscriptions) {
@@ -209,6 +229,7 @@ public class Magazine extends Product {
   /**
    * 
    * getter for pagesRead
+   * 
    * @return number of pages read
    */
   public int getPagesRead() {
@@ -218,6 +239,7 @@ public class Magazine extends Product {
   /**
    *
    * setter for pagesRead
+   * 
    * @param pagesCount number of pages read
    */
   public void setPagesRead(int pagesCount) {
@@ -227,6 +249,7 @@ public class Magazine extends Product {
   /**
    * 
    * getter for pagesRead
+   * 
    * @return String representation of the magazine
    */
   @Override

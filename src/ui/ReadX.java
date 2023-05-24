@@ -23,6 +23,7 @@ public class ReadX {
   /**
    * 
    * My classic print method uwu
+   * 
    * @param uwu object to print
    */
   public static void print(Object uwu) {
@@ -32,6 +33,7 @@ public class ReadX {
   /**
    * 
    * Menu of the program
+   * 
    * @param args arguments of the program (in this case, none)
    */
   public static void main(String[] args) {
@@ -433,9 +435,10 @@ public class ReadX {
   /**
    * 
    * Reading session menu
-   * @param bookName the name of the book
-   * @param pages the number of pages of the book
-   * @param ads if the user should watch ads
+   * 
+   * @param bookName  the name of the book
+   * @param pages     the number of pages of the book
+   * @param ads       if the user should watch ads
    * @param userIndex the index of the user in the array
    * @param productId the id of the product
    */

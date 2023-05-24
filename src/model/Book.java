@@ -13,13 +13,14 @@ public class Book extends Product {
 
   /**
    * constructor of the book class
-   * @param id        id of the book
-   * @param name      name of the book
-   * @param pages     number of pages of the book
-   * @param date      date of the book
-   * @param pagesRead number of pages read of the book
-   * @param price     price of the book
-   * @param image     image of the book
+   * 
+   * @param id         id of the book
+   * @param name       name of the book
+   * @param pages      number of pages of the book
+   * @param date       date of the book
+   * @param pagesRead  number of pages read of the book
+   * @param price      price of the book
+   * @param image      image of the book
    * @param review     short review of the book
    * @param genre      genre of the book
    * @param soldCopies number of sold copies
@@ -35,9 +36,10 @@ public class Book extends Product {
   /**
    *
    * setter for date
+   * 
    * @param date date of the book
    * @return date Calendar
-   */ 
+   */
   public Calendar setDate(String date) {
     return getCalendar(date);
   }
@@ -45,6 +47,7 @@ public class Book extends Product {
   /**
    *
    * getter for id
+   * 
    * @return id String
    */
   public String getId() {
@@ -54,6 +57,7 @@ public class Book extends Product {
   /**
    *
    * setter for id
+   * 
    * @param id unique id of the book
    */
   public void setId(String id) {
@@ -63,6 +67,7 @@ public class Book extends Product {
   /**
    * 
    * getter for name
+   * 
    * @return name String
    */
   public String getName() {
@@ -72,6 +77,7 @@ public class Book extends Product {
   /**
    *
    * setter for name
+   * 
    * @param name name of the book
    */
   public void setName(String name) {
@@ -81,6 +87,7 @@ public class Book extends Product {
   /**
    *
    * getter for pages
+   * 
    * @return pages int
    */
   public int getPages() {
@@ -90,6 +97,7 @@ public class Book extends Product {
   /**
    *
    * getter for pages
+   * 
    * @param pages number of pages of the book
    */
   public void setPages(int pages) {
@@ -99,6 +107,7 @@ public class Book extends Product {
   /**
    *
    * getter for review
+   * 
    * @return review String
    */
   public String getReview() {
@@ -108,6 +117,7 @@ public class Book extends Product {
   /**
    * 
    * setter for review
+   * 
    * @param review short review of the book
    */
   public void setReview(String review) {
@@ -117,6 +127,7 @@ public class Book extends Product {
   /**
    *
    * getter for date
+   * 
    * @return date Calendar
    */
   public Calendar getDate() {
@@ -126,6 +137,7 @@ public class Book extends Product {
   /**
    *
    * setter for date
+   * 
    * @param date date of the book
    */
   public void setDate(Calendar date) {
@@ -135,6 +147,7 @@ public class Book extends Product {
   /**
    *
    * getter for genre
+   * 
    * @return genre TGenre
    */
   public TGenre getGenre() {
@@ -144,6 +157,7 @@ public class Book extends Product {
   /**
    *
    * setter for genre
+   * 
    * @param genre genre of the book
    */
   public void setGenre(String genre) {
@@ -153,6 +167,7 @@ public class Book extends Product {
   /**
    *
    * getter for image
+   * 
    * @return image String
    */
   public String getImage() {
@@ -162,6 +177,7 @@ public class Book extends Product {
   /**
    *
    * setter for image
+   * 
    * @param image image of the book
    */
   public void setImage(String image) {
@@ -171,6 +187,7 @@ public class Book extends Product {
   /**
    *
    * getter for soldCopies
+   * 
    * @return soldCopies int
    */
   public int getSoldCopies() {
@@ -180,6 +197,7 @@ public class Book extends Product {
   /**
    *
    * setter for soldCopies
+   * 
    * @param soldCopies number of sold copies
    */
   public void setSoldCopies(int soldCopies) {
@@ -189,6 +207,7 @@ public class Book extends Product {
   /**
    *
    * getter for price
+   * 
    * @return price float
    */
   public float getPrice() {
@@ -198,6 +217,7 @@ public class Book extends Product {
   /**
    *
    * setter for price
+   * 
    * @param price price of the book
    */
   public void setPrice(float price) {
@@ -207,6 +227,7 @@ public class Book extends Product {
   /**
    *
    * getter for pagesRead
+   * 
    * @return pagesRead int
    */
   public int getPagesRead() {
@@ -216,6 +237,7 @@ public class Book extends Product {
   /**
    *
    * setter for pagesRead
+   * 
    * @param pagesRead number of pages read
    */
   public void setPagesRead(int pagesRead) {
@@ -224,6 +246,7 @@ public class Book extends Product {
 
   /**
    * Method that returns a string with the book's information.
+   * 
    * @return a string with the book's information.
    */
   @Override

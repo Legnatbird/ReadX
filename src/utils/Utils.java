@@ -16,11 +16,13 @@ public class Utils {
    * 
    * constructor of the utils class
    */
-  public Utils() {}
+  public Utils() {
+  }
 
   /**
    * 
    * method for get users from the api
+   * 
    * @return users from the api
    */
   public static ArrayList<User> getUsers() {
@@ -49,6 +51,7 @@ public class Utils {
   /**
    * 
    * method for get current date
+   * 
    * @return current date
    */
   public static Calendar getCurrentDate() {

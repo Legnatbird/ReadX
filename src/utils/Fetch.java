@@ -13,10 +13,13 @@ public class Fetch {
    * 
    * constructor of the fetch class
    */
-  public Fetch(){}
+  public Fetch() {
+  }
+
   /**
    * 
    * Method that fetches data from the dummy api.
+   * 
    * @return data from the dummy api
    */
   public static String[] getData() {

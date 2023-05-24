@@ -18,6 +18,7 @@ public abstract class User {
   /**
    *
    * getter for name
+   * 
    * @return name of the user
    */
   public abstract String getName();
@@ -25,6 +26,7 @@ public abstract class User {
   /**
    *
    * setter for name
+   * 
    * @param name name of the user
    */
   public abstract void setName(String name);
@@ -32,6 +34,7 @@ public abstract class User {
   /**
    *
    * getter for id of the user
+   * 
    * @return id of the user
    */
   public abstract String getId();
@@ -39,6 +42,7 @@ public abstract class User {
   /**
    *
    * setter for id
+   * 
    * @param idNumber unique id of the user
    */
   public abstract void setId(String idNumber);
@@ -46,6 +50,7 @@ public abstract class User {
   /**
    *
    * getter for date
+   * 
    * @return email of the user
    */
   public abstract Calendar getRegistrationDate();
@@ -53,6 +58,7 @@ public abstract class User {
   /**
    *
    * setter for date
+   * 
    * @param registrationDate date of registration
    */
   public abstract void setRegistrationDate(Calendar registrationDate);
@@ -60,6 +66,7 @@ public abstract class User {
   /**
    *
    * getter for products bought by the user
+   * 
    * @return products bought by the user
    */
   public abstract ArrayList<String> getProducts();
@@ -67,6 +74,7 @@ public abstract class User {
   /**
    *
    * setter for products bought by the user
+   * 
    * @param productId product bought by the user
    */
   public abstract void setProduct(String productId);

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.Random;
 import utils.Utils;
@@ -32,10 +34,12 @@ public class ReadXController {
   /**
    *
    * This method register a user in the system.
+   * 
    * @param name name of the user
-   * @param id id of the user
+   * @param id   id of the user
    * @param type type of the user
-   * @return a message that indicates if the user was registered successfully or not
+   * @return a message that indicates if the user was registered successfully or
+   *         not
    */
   public String RegisterUser(String name, String id, boolean type) {
     for (int i = 0; i < users.size(); i++) {
@@ -54,6 +58,7 @@ public class ReadXController {
   /**
    *
    * This method register a magazine in the system.
+   * 
    * @param id                id of the book
    * @param name              name of the book
    * @param pages             number of pages of the book
@@ -64,7 +69,8 @@ public class ReadXController {
    * @param pagesRead         number of pages read of the book
    * @param issuanceFrequency frequency of issuance of the book
    * @param subscriptions     number of subscriptions of the book
-   * @return a message that indicates if the magazine was registered successfully or not
+   * @return a message that indicates if the magazine was registered successfully
+   *         or not
    */
   public String RegisterMagazine(String id, String name, int pages, String date, int pagesRead, float price,
       String image, String category, int issuanceFrequency, int subscriptions) {
@@ -81,6 +87,7 @@ public class ReadXController {
   /**
    *
    * This method remove a book in the system.
+   * 
    * @param bookId id of the book
    * @return a message that indicates if the book was removed successfully or not
    */
@@ -99,8 +106,10 @@ public class ReadXController {
   /**
    *
    * This method remove a magazine in the system.
+   * 
    * @param magazineId id of the magazine
-   * @return a message that indicates if the magazine was removed successfully or not
+   * @return a message that indicates if the magazine was removed successfully or
+   *         not
    */
   public String RemoveMagazine(String magazineId) {
     for (int i = 0; i < products.size(); i++) {
@@ -117,6 +126,7 @@ public class ReadXController {
   /**
    *
    * This method register a book in the system.
+   * 
    * @param id         id of the book
    * @param name       name of the book
    * @param pages      number of pages of the book
@@ -127,7 +137,8 @@ public class ReadXController {
    * @param pagesRead  number of pages read of the book
    * @param genre      genre of the book
    * @param soldCopies number of sold copies of the book
-   * @return a message that indicates if the book was registered successfully or not
+   * @return a message that indicates if the book was registered successfully or
+   *         not
    */
   public String RegisterBook(String id, String name, int pages, String date, int pagesRead, float price, String image,
       String review, String genre, int soldCopies) {
@@ -143,6 +154,7 @@ public class ReadXController {
   /**
    *
    * This method buy a book by a user.
+   * 
    * @param userId id of the user
    * @param bookId id of the book
    * @return a message that indicates if the book was bought successfully or not
@@ -173,9 +185,11 @@ public class ReadXController {
   /**
    *
    * This method subscribe a magazine by a user.
+   * 
    * @param userId     id of the user
    * @param magazineId id of the magazine
-   * @return a message that indicates if the magazine was subscribed successfully or not
+   * @return a message that indicates if the magazine was subscribed successfully
+   *         or not
    */
   public String SubscribeMagazine(String userId, String magazineId) {
     for (User user : users) {
@@ -206,17 +220,19 @@ public class ReadXController {
   /**
    * 
    * This method modifies the information of a Magazine
-   * @param id new id of the magazine
-   * @param name new name of the magazine
-   * @param pages new number of pages of the magazine
-   * @param date new date of publication of the magazine
-   * @param category new category of the magazine
-   * @param image new image url of the magazine
-   * @param price new price of the magazine
-   * @param issuanceFrequency new frequency of issuance of the magazine 
-   * @param subscriptions new number of subscriptions of the magazine
-   * @param pagesRead new number of pages read of the magazine
-   * @return a message that indicates if the magazine was modified successfully or not
+   * 
+   * @param id                new id of the magazine
+   * @param name              new name of the magazine
+   * @param pages             new number of pages of the magazine
+   * @param date              new date of publication of the magazine
+   * @param category          new category of the magazine
+   * @param image             new image url of the magazine
+   * @param price             new price of the magazine
+   * @param issuanceFrequency new frequency of issuance of the magazine
+   * @param subscriptions     new number of subscriptions of the magazine
+   * @param pagesRead         new number of pages read of the magazine
+   * @return a message that indicates if the magazine was modified successfully or
+   *         not
    */
   public String ModifyMagazine(String id, String name, int pages, String date, String category, String image,
       float price, int issuanceFrequency, int subscriptions, int pagesRead) {
@@ -243,15 +259,16 @@ public class ReadXController {
   /**
    * 
    * This method modifies the information of a Book
-   * @param id new id of the book
-   * @param name new name of the book
-   * @param pages new number of pages of the book
-   * @param date new date of publication of the book
-   * @param image new image url of the book
-   * @param price new price of the book
-   * @param review new review of the book
-   * @param pagesRead new number of pages read of the book
-   * @param genre new genre of the book
+   * 
+   * @param id         new id of the book
+   * @param name       new name of the book
+   * @param pages      new number of pages of the book
+   * @param date       new date of publication of the book
+   * @param image      new image url of the book
+   * @param price      new price of the book
+   * @param review     new review of the book
+   * @param pagesRead  new number of pages read of the book
+   * @param genre      new genre of the book
    * @param soldCopies new number of sold copies of the book
    * @return a message that indicates if the book was modified successfully or not
    */
@@ -279,6 +296,7 @@ public class ReadXController {
   /**
    * 
    * This method return all the products
+   * 
    * @return an ArrayList with all the products
    */
   public ArrayList<Product> getProducts() {
@@ -288,6 +306,7 @@ public class ReadXController {
   /**
    * 
    * This method return all the users
+   * 
    * @return an ArrayList with all the users
    */
   public ArrayList<User> getUsers() {
@@ -297,6 +316,7 @@ public class ReadXController {
   /**
    *
    * This method return a product
+   * 
    * @param productId id of the product
    * @return the product
    */
@@ -312,6 +332,7 @@ public class ReadXController {
   /**
    * 
    * This method return a book
+   * 
    * @param bookId id of the book
    * @return the book
    */
@@ -329,6 +350,7 @@ public class ReadXController {
   /**
    * 
    * This method return a magazine
+   * 
    * @param magazineId id of the magazine
    * @return the magazine
    */
@@ -346,6 +368,7 @@ public class ReadXController {
   /**
    * 
    * This method return user index on the ArrayList
+   * 
    * @param userId id of the user
    * @return the user index on the ArrayList
    */
@@ -361,16 +384,18 @@ public class ReadXController {
   /**
    * 
    * This method return a user by its index on the ArrayList
+   * 
    * @param userIndex
    * @return the user
    */
   public User getUser(int userIndex) {
     return users.get(userIndex);
   }
-  
+
   /**
    * 
    * This method return a regular user by index on the ArrayList
+   * 
    * @param index index of the user on the ArrayList
    * @return the regular user
    */
@@ -383,6 +408,7 @@ public class ReadXController {
 
   /**
    * This method generate the reports
+   * 
    * @return a string with all the reports
    */
   public String GenerateReport() {
@@ -392,8 +418,11 @@ public class ReadXController {
 
   /**
    * 
-   * This method generates 10 books and 10 magazines and 10 users (5 regular and 5 premium)
-   * @return a message that indicates if the test elements were generated successfully or not
+   * This method generates 10 books and 10 magazines and 10 users (5 regular and 5
+   * premium)
+   * 
+   * @return a message that indicates if the test elements were generated
+   *         successfully or not
    */
   public String GenerateTestElements() {
     for (int i = 0; i < 10; i++) {
@@ -409,6 +438,7 @@ public class ReadXController {
   /**
    * 
    * This method generates a random hexadecimal number
+   * 
    * @return a random hexadecimal number
    */
   public String ShowUsers() {
@@ -422,6 +452,7 @@ public class ReadXController {
   /**
    * 
    * This method shows all the books
+   * 
    * @return a string with all the books
    */
   public String ShowBooks() {
@@ -437,6 +468,7 @@ public class ReadXController {
   /**
    * 
    * This method return all the products of the user
+   * 
    * @param userId id of the user
    * @return a string with all the products of the user
    */
@@ -472,7 +504,8 @@ public class ReadXController {
       result.append(user.getProducts().get(i)).append(" | ");
     }
     result.append("\n");
-    result.append("Type the x,y coordinate or the corresponding code of the bibliographic product to start a reading session.");
+    result.append(
+        "Type the x,y coordinate or the corresponding code of the bibliographic product to start a reading session.");
     result.append("\n");
     result.append("Type A to go to the previous page");
     result.append("\n");
@@ -485,6 +518,7 @@ public class ReadXController {
   /**
    * 
    * This methods return if the user can see the ads or not
+   * 
    * @param userIndex index of the user on the ArrayList
    * @return true if the user can see the ads, false if not
    */
@@ -492,10 +526,10 @@ public class ReadXController {
     return users.get(userIndex) instanceof RegularUser;
   }
 
-
   /**
    * 
    * This method shows all the magazines
+   * 
    * @return a string with all the magazines
    */
   public String ShowMagazines() {
@@ -510,7 +544,89 @@ public class ReadXController {
 
   /**
    * 
+   * This method order the products by its date
+   * 
+   * @return a string with all the products ordered by its date
+   */
+  public String OrderByDate() {
+    StringBuilder result = new StringBuilder();
+    ArrayList<Product> productsCopy = new ArrayList<>(products);
+    Collections.sort(productsCopy);
+    for (Product product : productsCopy) {
+      result.append(product.toString()).append("\n");
+    }
+    return result.toString();
+  }
+
+  /**
+   * 
+   * This method order the products by most readed
+   * 
+   * @return a string with all the products ordered by most readed
+   */
+  public String OrderByMostReaded() {
+    StringBuilder result = new StringBuilder();
+    ArrayList<Product> productsCopy = new ArrayList<>(products);
+    Collections.sort(productsCopy, new Comparator<Product>() {
+      @Override
+      public int compare(Product p1, Product p2) {
+        return p2.getPagesRead() - p1.getPagesRead();
+      }
+    });
+    for (Product products : productsCopy) {
+      if (products instanceof Book) {
+        result.append(products.toString()).append("\n");
+        break;
+      }
+    }
+    for (Product products : productsCopy) {
+      if (products instanceof Magazine) {
+        result.append(products.toString()).append("\n");
+        break;
+      }
+    }
+    return result.toString();
+  }
+
+  /**
+   * 
+   * This method calculates the number of pages read
+   * 
+   * @return a string with the number of pages read for each product (book or
+   *         magazine) with the name
+   */
+  public String CalculatePagesRead() {
+    StringBuilder result = new StringBuilder();
+    for (Product product : products) {
+      if (product instanceof Book) {
+        result.append("Book:").append(" ").append(product.getName()).append(" ").append(product.getPagesRead())
+            .append("\n");
+      }
+      if (product instanceof Magazine) {
+        result.append("Magazine:").append(" ").append(product.getName()).append(" ").append(product.getPagesRead())
+            .append("\n");
+      }
+    }
+    return result.toString();
+  }
+
+  /**
+   * 
+   * This method create a String with the gender of book most readed and the
+   * category of magazine most readed
+   * 
+   * @return String with the gender/category most readed
+   */
+  public String MostlyReport() {
+    StringBuilder result = new StringBuilder();
+
+    return result.toString();
+  }
+
+  /**
+   * 
    * This method generates a random hexadecimal number
+   * 
    * @return a random hexadecimal number
    */
   private String GenRandomHex() {

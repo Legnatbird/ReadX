@@ -16,17 +16,17 @@ public class RegularUser extends User implements Advertisable {
   private int booksCount;
   private int magazineCount;
   private final String[] ads = {
-    "Subscribe to Combo Plus and get Disney+ and Star+ at an incredible price!",
-    "Now your pets have a favorite app: Laika. The best products for your furry friend.",
-    "It's our anniversary! Visit your nearest Éxito and be surprised with the best offers."
-};
-    
+      "Subscribe to Combo Plus and get Disney+ and Star+ at an incredible price!",
+      "Now your pets have a favorite app: Laika. The best products for your furry friend.",
+      "It's our anniversary! Visit your nearest Éxito and be surprised with the best offers."
+  };
 
   /**
    * 
    * constructor of the regular user class
-   * @param id id of the user
-   * @param name name of the user
+   * 
+   * @param id               id of the user
+   * @param name             name of the user
    * @param registrationDate date of registration
    */
   public RegularUser(String id, String name, Calendar registrationDate) {
@@ -38,6 +38,7 @@ public class RegularUser extends User implements Advertisable {
   /**
    * 
    * This method return a random ad.
+   * 
    * @return a random ad
    */
   public String showAds() {
@@ -48,6 +49,7 @@ public class RegularUser extends User implements Advertisable {
   /**
    *
    * getter for name
+   * 
    * @return name of the user
    */
   public String getName() {
@@ -57,6 +59,7 @@ public class RegularUser extends User implements Advertisable {
   /**
    *
    * setter for name
+   * 
    * @param name name of the user
    */
   public void setName(String name) {
@@ -66,6 +69,7 @@ public class RegularUser extends User implements Advertisable {
   /**
    * 
    * getter for id
+   * 
    * @return id of the user
    */
   public String getId() {
@@ -75,6 +79,7 @@ public class RegularUser extends User implements Advertisable {
   /**
    *
    * setter for id
+   * 
    * @param id unique id of the user
    */
   public void setId(String id) {
@@ -84,6 +89,7 @@ public class RegularUser extends User implements Advertisable {
   /**
    * 
    * getter for date
+   * 
    * @return date of registration
    */
   public Calendar getRegistrationDate() {
@@ -93,6 +99,7 @@ public class RegularUser extends User implements Advertisable {
   /**
    *
    * setter for date
+   * 
    * @param registrationDate date of registration
    */
   public void setRegistrationDate(Calendar registrationDate) {
@@ -102,6 +109,7 @@ public class RegularUser extends User implements Advertisable {
   /**
    * 
    * getter for products
+   * 
    * @return products bought by the user
    */
   public ArrayList<String> getProducts() {
@@ -111,6 +119,7 @@ public class RegularUser extends User implements Advertisable {
   /**
    *
    * setter for products
+   * 
    * @param productId products bought by the user
    */
   public void setProduct(String productId) {
@@ -121,6 +130,7 @@ public class RegularUser extends User implements Advertisable {
   /**
    * 
    * getter for booksCount
+   * 
    * @return number of books bought by the user
    */
   public int getBookCount() {
@@ -130,6 +140,7 @@ public class RegularUser extends User implements Advertisable {
   /**
    *
    * setter for booksCount
+   * 
    * @param booksCount number of books bought by the user
    */
   public void setBookCount(int booksCount) {
@@ -139,6 +150,7 @@ public class RegularUser extends User implements Advertisable {
   /**
    * 
    * getter for magazineCount
+   * 
    * @return number of magazines bought by the user
    */
   public int getMagazineCount() {
@@ -148,6 +160,7 @@ public class RegularUser extends User implements Advertisable {
   /**
    *
    * setter for magazineCount
+   * 
    * @param magazineCount number of magazines bought by the user
    */
   public void setMagazineCount(int magazineCount) {
@@ -157,6 +170,7 @@ public class RegularUser extends User implements Advertisable {
   /**
    * 
    * This method returns the user's information
+   * 
    * @return a string with the user's information
    */
   @Override

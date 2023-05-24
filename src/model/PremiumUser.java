@@ -16,8 +16,9 @@ public class PremiumUser extends User {
 
   /**
    * constructor of the premium user class
-   * @param id id of the user
-   * @param name name of the user
+   * 
+   * @param id               id of the user
+   * @param name             name of the user
    * @param registrationDate date of registration
    */
   public PremiumUser(String id, String name, Calendar registrationDate) {
@@ -29,6 +30,7 @@ public class PremiumUser extends User {
   /**
    * 
    * getter for name
+   * 
    * @return name of the user
    */
   public String getName() {
@@ -38,6 +40,7 @@ public class PremiumUser extends User {
   /**
    *
    * setter for name
+   * 
    * @param name name of the user
    */
   public void setName(String name) {
@@ -47,6 +50,7 @@ public class PremiumUser extends User {
   /**
    * 
    * getter for id of the user
+   * 
    * @return id of the user
    */
   public String getId() {
@@ -56,6 +60,7 @@ public class PremiumUser extends User {
   /**
    *
    * setter for id
+   * 
    * @param id unique id of the user
    */
   public void setId(String id) {
@@ -65,6 +70,7 @@ public class PremiumUser extends User {
   /**
    * 
    * getter for date
+   * 
    * @return date of registration
    */
   public Calendar getRegistrationDate() {
@@ -74,6 +80,7 @@ public class PremiumUser extends User {
   /**
    *
    * setter for date
+   * 
    * @param registrationDate date of registration
    */
   public void setRegistrationDate(Calendar registrationDate) {
@@ -83,6 +90,7 @@ public class PremiumUser extends User {
   /**
    *
    * getter for products bought by the user
+   * 
    * @return products bought by the user
    */
   public ArrayList<String> getProducts() {
@@ -92,6 +100,7 @@ public class PremiumUser extends User {
   /**
    *
    * setter for products bought by the user
+   * 
    * @param productId products bought by the user
    */
   public void setProduct(String productId) {
@@ -101,6 +110,7 @@ public class PremiumUser extends User {
   /**
    * 
    * This method returns the user's information
+   * 
    * @return String with the user's information
    */
   @Override
