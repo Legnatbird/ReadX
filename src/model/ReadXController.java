@@ -359,6 +359,29 @@ public class ReadXController {
   }
 
   /**
+   * 
+   * This method return a user by its index on the ArrayList
+   * @param userIndex
+   * @return the user
+   */
+  public User getUser(int userIndex) {
+    return users.get(userIndex);
+  }
+  
+  /**
+   * 
+   * This method return a regular user by index on the ArrayList
+   * @param index index of the user on the ArrayList
+   * @return the regular user
+   */
+  public RegularUser getRegularUser(int index) {
+    if (users.get(index) instanceof RegularUser) {
+      return (RegularUser) users.get(index);
+    }
+    return null;
+  }
+
+  /**
    * This method generate the reports
    * @return a string with all the reports
    */
@@ -468,15 +491,6 @@ public class ReadXController {
     return users.get(userIndex) instanceof RegularUser;
   }
 
-  /**
-   * 
-   * This method return a regular user
-   * @param userIndex index of the user on the ArrayList
-   * @return the regular user
-   */
-  public RegularUser getRegularUser(int userIndex) {
-    return (RegularUser) users.get(userIndex);
-  }
 
   /**
    * 

@@ -316,13 +316,21 @@ public class ReadX {
    * Show the products of a user
    */
   public static void ShowUserProducts() {
+    String option;
+    int productSize;
     print("Enter user id: ");
     input.nextLine();
     String id = input.nextLine();
+    int userIndex = controller.getUser(id);
+    if (userIndex == -1) {
+      print("User not found");
+      return;
+    }
+    productSize = controller.getUser(userIndex).getProducts().size();
     int page = 1;
     do {
       print(controller.ShowUserProducts(id, page));
-      String option = input.nextLine().toUpperCase();
+      option = input.nextLine().toUpperCase();
       switch (option) {
         case "A" -> {
           if (page == 1) {
@@ -332,7 +340,7 @@ public class ReadX {
           page--;
         }
         case "S" -> {
-          if (controller.getRegularUser(controller.getUser(id)).getProducts().size() <= page * 5) {
+          if (productSize <= page * 5) {
             print("You can't go forward");
             break;
           }
@@ -340,11 +348,11 @@ public class ReadX {
         }
         case "E" -> {
           print("Exiting");
-          return;
+          break;
         }
         default -> {
           String name, productId;
-          int pages;
+          int pages, x, y, index;
           boolean ads;
           if (!option.matches("/,/")) {
             productId = option;
@@ -354,37 +362,37 @@ public class ReadX {
             }
             name = controller.getProduct(productId).getName();
             pages = controller.getProduct(productId).getPages();
-            ads = controller.Advertisable(controller.getUser(id));
-            ReadMenu(name, pages, ads, controller.getUser(id), productId);
+            ads = controller.Advertisable(userIndex);
+            ReadMenu(name, pages, ads, userIndex, productId);
           }
           String[] coordinates = option.split(",");
           if (coordinates.length != 2) {
             print("Invalid option");
             break;
           }
-          int x = Integer.parseInt(coordinates[0]);
-          int y = Integer.parseInt(coordinates[1]);
+          x = Integer.parseInt(coordinates[0]);
+          y = Integer.parseInt(coordinates[1]);
           if (x < 1 || x > 5 || y < 1 || y > 5) {
             print("Invalid option");
             break;
           }
-          int index = (page - 1) * 5 + (x - 1) * 5 - (y - 1);
-          if (index >= controller.getRegularUser(controller.getUser(id)).getProducts().size()) {
+          index = (page - 1) * 5 + (x - 1) * 5 - (y - 1);
+          if (index >= productSize) {
             print("Invalid option");
             break;
           }
-          productId = controller.getRegularUser(controller.getUser(id)).getProducts().get(index);
+          productId = controller.getUser(userIndex).getProducts().get(index);
           name = controller.getProduct(productId).getName();
           pages = controller.getProduct(productId).getPages();
           ads = false;
-          if (controller.Advertisable(controller.getUser(id))) {
+          if (controller.Advertisable(userIndex)) {
             print("You should watch ads in your reading session");
             ads = true;
           }
-          ReadMenu(name, pages, ads, controller.getUser(id), productId);
+          ReadMenu(name, pages, ads, userIndex, productId);
         }
       }
-    } while (true);
+    } while (!option.equals("E"));
   }
 
   /**
@@ -432,6 +440,7 @@ public class ReadX {
    * @param productId the id of the product
    */
   public static void ReadMenu(String bookName, int pages, boolean ads, int userIndex, String productId) {
+    String option;
     int pagesRead = 0;
     do {
       print("Reading session in progress:");
@@ -443,7 +452,7 @@ public class ReadX {
       if ((ads) && (pagesRead > 0) && (pagesRead % 20 == 0)) {
         print(controller.getRegularUser(userIndex).showAds());
       }
-      String option = input.nextLine().toUpperCase();
+      option = input.nextLine().toUpperCase();
       switch (option) {
         case "A" -> {
           if (pagesRead < 1) {
@@ -462,10 +471,10 @@ public class ReadX {
         case "B" -> {
           print("Reading session finished");
           controller.getBook(productId).setPagesRead(pagesRead);
-          return;
+          break;
         }
       }
-    } while (true);
+    } while (!option.equals("B"));
   }
 
   /**
