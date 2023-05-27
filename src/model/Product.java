@@ -2,8 +2,6 @@ package model;
 
 import java.util.Calendar;
 
-// TODO Implement comparable interface and override compareTo method
-
 /**
  * 
  * Class that represents a product.
@@ -184,7 +182,6 @@ public abstract class Product implements Comparable<Product> {
   public int compareTo(Product product) {
     return this.date.compareTo(product.date);
   }
-
 
   /**
    *

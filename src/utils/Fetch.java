@@ -13,8 +13,7 @@ public class Fetch {
    * 
    * constructor of the fetch class
    */
-  public Fetch() {
-  }
+  public Fetch() {}
 
   /**
    * 

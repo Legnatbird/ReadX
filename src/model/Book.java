@@ -22,7 +22,7 @@ public class Book extends Product {
    * @param price      price of the book
    * @param image      image of the book
    * @param review     short review of the book
-   * @param gender      genre of the book
+   * @param gender     genre of the book
    * @param soldCopies number of sold copies
    */
   public Book(String id, String name, int pages, String date, int pagesRead, float price, String image, String review,

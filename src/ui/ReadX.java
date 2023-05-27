@@ -402,8 +402,21 @@ public class ReadX {
    * Show the reports of the program
    */
   public static void GenerateReport() {
-    // TODO - implement ReadX.GenerateReport
-    throw new UnsupportedOperationException();
+    int option;
+    print("Welcome to the reports menu");
+    do {
+      ReportMenu();
+      option = input.nextInt();
+      switch (option) {
+        case 1 -> print(controller.SummaryOfReadPages());
+        case 2 -> print(controller.BestGenderAndCategoryRead());
+        case 3 -> print(controller.Top5GenderAndCategoryRead());
+        case 4 -> print(controller.SoldBooksByGender());
+        case 5 -> print(controller.ActiveSubsByCategory());
+        case 6 -> print("Exiting");
+        default -> print("Invalid option");
+      }
+    } while (option != 6);
   }
 
   /**
@@ -422,6 +435,19 @@ public class ReadX {
     print("9. Show users");
     print("10. Generate reports");
     print("11. Exit");
+  }
+
+  /**
+   * 
+   * The menu of the reports
+   */
+  public static void ReportMenu() {
+    print("1. Summary of read pages");
+    print("2. Best gender and category read");
+    print("3. Top 5 gender and category read");
+    print("4. Sold books by gender");
+    print("5. Active subs by category");
+    print("6. Exit");
   }
 
   /**

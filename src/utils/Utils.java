@@ -16,8 +16,7 @@ public class Utils {
    * 
    * constructor of the utils class
    */
-  public Utils() {
-  }
+  public Utils() {}
 
   /**
    * 
