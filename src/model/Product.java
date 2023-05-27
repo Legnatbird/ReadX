@@ -185,9 +185,6 @@ public abstract class Product implements Comparable<Product> {
     return this.date.compareTo(product.date);
   }
 
-  public int compareTo(Product product, String sortBy) {
-    return this.pagesRead - product.pagesRead;
-  }
 
   /**
    *

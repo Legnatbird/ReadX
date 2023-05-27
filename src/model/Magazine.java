@@ -132,8 +132,8 @@ public class Magazine extends Product {
    * 
    * @return category of the magazine
    */
-  public TCategory getCategory() {
-    return this.category;
+  public String getCategory() {
+    return this.category.toString();
   }
 
   /**
@@ -254,22 +254,6 @@ public class Magazine extends Product {
    */
   @Override
   public String toString() {
-    String day = String.valueOf(date.get(Calendar.DAY_OF_MONTH));
-    String month = String.valueOf(date.get(Calendar.MONTH) + 1);
-    String year = String.valueOf(date.get(Calendar.YEAR));
-    String printDate = day + "/" + month + "/" + year;
-    return "Magazine{" +
-        "id='" + id + '\'' +
-        ", name='" + name + '\'' +
-        ", pages=" + pages +
-        ", date=" + printDate +
-        ", category=" + category +
-        ", image='" + image + '\'' +
-        ", price=" + price +
-        ", issuanceFrequency=" + issuanceFrequency +
-        ", subscriptions=" + subscriptions +
-        ", pagesRead=" + pagesRead +
-        '}';
+    return "Category: " + category + "\n" + "Pages Read: " + pagesRead;
   }
-
 }

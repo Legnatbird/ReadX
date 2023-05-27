@@ -2,6 +2,7 @@ package model;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 import utils.Utils;
@@ -284,7 +285,7 @@ public class ReadXController {
           product.setPrice(price);
           product.setImage(image);
           ((Book) product).setReview(review);
-          ((Book) product).setGenre(genre);
+          ((Book) product).setGender(genre);
           ((Book) product).setSoldCopies(soldCopies);
           return "Book modified successfully";
         }
@@ -550,9 +551,8 @@ public class ReadXController {
    */
   public String OrderByDate() {
     StringBuilder result = new StringBuilder();
-    ArrayList<Product> productsCopy = new ArrayList<>(products);
-    Collections.sort(productsCopy);
-    for (Product product : productsCopy) {
+    Collections.sort(products);
+    for (Product product : products) {
       result.append(product.toString()).append("\n");
     }
     return result.toString();
@@ -560,32 +560,41 @@ public class ReadXController {
 
   /**
    * 
-   * This method order the products by most readed
+   * This method create a String with the most readed product
    * 
    * @return a string with all the products ordered by most readed
    */
-  public String OrderByMostReaded() {
+  public String MostReadedReport() {
     StringBuilder result = new StringBuilder();
-    ArrayList<Product> productsCopy = new ArrayList<>(products);
-    Collections.sort(productsCopy, new Comparator<Product>() {
-      @Override
-      public int compare(Product p1, Product p2) {
-        return p2.getPagesRead() - p1.getPagesRead();
-      }
-    });
-    for (Product products : productsCopy) {
+    ArrayList<Product> productsPagesRead = OrderByPagesRead();
+
+    for (Product products : productsPagesRead) {
       if (products instanceof Book) {
         result.append(products.toString()).append("\n");
         break;
       }
-    }
-    for (Product products : productsCopy) {
       if (products instanceof Magazine) {
         result.append(products.toString()).append("\n");
         break;
       }
     }
     return result.toString();
+  }
+
+  /**
+   * 
+   * This method order the products by its pages read
+   * @return ArrayList with the products ordered by its pages read
+   */
+  private ArrayList<Product> OrderByPagesRead() {
+    ArrayList<Product> productsCopy = new ArrayList<>(products);
+    Collections.sort(products, new Comparator<Product>() {
+      @Override
+      public int compare(Product p1, Product p2) {
+        return p2.getPagesRead() - p1.getPagesRead();
+      }
+    });
+    return productsCopy;
   }
 
   /**
@@ -597,32 +606,136 @@ public class ReadXController {
    */
   public String CalculatePagesRead() {
     StringBuilder result = new StringBuilder();
+    ArrayList<Integer> pagesRead = new ArrayList<>(2);
     for (Product product : products) {
       if (product instanceof Book) {
-        result.append("Book:").append(" ").append(product.getName()).append(" ").append(product.getPagesRead())
-            .append("\n");
+        pagesRead.set(0, product.getPagesRead() + pagesRead.get(0));
       }
       if (product instanceof Magazine) {
-        result.append("Magazine:").append(" ").append(product.getName()).append(" ").append(product.getPagesRead())
-            .append("\n");
+        pagesRead.set(1, product.getPagesRead() + pagesRead.get(1));
       }
     }
+    result.append("Books: ").append(pagesRead.get(0)).append("\n");
+    result.append("Magazines: ").append(pagesRead.get(1)).append("\n");
     return result.toString();
   }
 
   /**
    * 
-   * This method create a String with the gender of book most readed and the
-   * category of magazine most readed
+   * This method create a String with the genders of book most read and the
+   * categorys of magazine most readed
    * 
    * @return String with the gender/category most readed
    */
   public String MostlyReport() {
     StringBuilder result = new StringBuilder();
 
+    ArrayList<Product> productsPagesRead = OrderByPagesRead();
+    ArrayList<Integer> genders = new ArrayList<>(3);
+    ArrayList<Integer> categories = new ArrayList<>(3);
+
+    for (Product product : productsPagesRead) {
+      if (product instanceof Book) {
+        switch (((Book) product).getGender()) {
+          case "SCIENCE_FICTION" -> genders.set(0, product.getPagesRead() + genders.get(0));
+          case "FANTASY" -> genders.set(1, product.getPagesRead() + genders.get(1));
+          case "HISTORICAL" -> genders.set(2, product.getPagesRead() + genders.get(0));
+        }
+      }
+      if (product instanceof Magazine) {
+        switch (((Magazine) product).getCategory()) {
+          case "VARIETY" -> categories.set(0, product.getPagesRead() + categories.get(0));
+          case "DESIGN" -> categories.set(1, product.getPagesRead() + categories.get(1));
+          case "SCIENTIFIC" -> categories.set(2, product.getPagesRead() + categories.get(2));
+        }
+      }
+    }
+
+    int mostReadedGender = Collections.max(genders);
+    int mostReadedCategory = Collections.max(categories);
+
+    result.append("The most readed genre is: " + GetGender(genders.indexOf(mostReadedGender)) + "with: "
+        + mostReadedGender + " pages readed\n");
+    result.append("The most readed category is: " + GetCategory(categories.indexOf(mostReadedCategory)) + "with: "
+        + mostReadedCategory + " pages readed\n");
+
     return result.toString();
   }
 
+  /**
+   * 
+   * This method create a String with the top 5 books and magazines readed
+   * @return String with the top
+   */
+  public String Top5Report() {
+    StringBuilder bookTop = new StringBuilder();
+    StringBuilder magazineTop = new StringBuilder();
+
+    ArrayList<Product> productsPagesRead = OrderByPagesRead();
+
+    int i = 0;
+    int k = 0;
+
+    for (Product product: productsPagesRead) {
+      if (i == 5) {
+        break;
+      }
+      if (product instanceof Book) {
+        bookTop.append(product.toString()).append("\n");
+        i++;
+      }
+    }
+
+    for (Product product: productsPagesRead) {
+      if (k == 5) {
+        break;
+      }
+      if (product instanceof Magazine) {
+        magazineTop.append(product.toString()).append("\n");
+        k++;
+      }
+    }
+
+    return "Top 5 Books:\n" + bookTop.toString() + "\nTop 5 Magazines:\n" + magazineTop.toString();
+  }
+
+  /**
+   * 
+   * This method create a String with for each gender the number of pages readed
+   * @return String with the genders and the number of pages readed
+   */
+  public String BooksSold() {
+
+    StringBuilder result = new StringBuilder();
+
+    ArrayList<Integer> genders = new ArrayList<>(3);
+    ArrayList<Integer> categories = new ArrayList<>(3);
+
+
+
+
+    return result.toString();
+  }
+
+  public int CalculateBooksSold() {
+    int booksSold = 0;
+    for (Product product : products) {
+      if (product instanceof Book) {
+        booksSold += ((Book) product).getSoldCopies();
+      }
+    }
+    return booksSold;
+  }
+
+  public int CalculateMagazineSubs() {
+    int magazineSubs = 0;
+    for (Product product : products) {
+      if (product instanceof Magazine) {
+        magazineSubs += ((Magazine) product).getSubscriptions();
+      }
+    }
+    return magazineSubs;
+  }
   /**
    * 
    * This method generates a random hexadecimal number
@@ -633,5 +746,37 @@ public class ReadXController {
     Random rand = new Random();
     int randomNumber = rand.nextInt(0xFFF + 1);
     return Integer.toHexString(randomNumber);
+  }
+
+  /**
+   * 
+   * This method get the name of the gender with a index
+   * @param genderIndex index on the arraylist of genders
+   * @return gender
+   */
+  private String GetGender(int genderIndex) {
+    String gender = "";
+    switch (genderIndex) {
+      case 1 -> gender = "SCIENCE_FICTION";
+      case 2 -> gender = "FANTASY";
+      case 3 -> gender = "HISTORICAL";
+    }
+    return gender;
+  }
+
+  /**
+   * 
+   * This method get the name of the category with a index
+   * @param categoryIndex index on the arraylist of categories
+   * @return category
+   */
+  private String GetCategory(int categoryIndex) {
+    String category = "";
+    switch (categoryIndex) {
+      case 1 -> category = "VARIETY";
+      case 2 -> category = "DESIGN";
+      case 3 -> category = "SCIENTIFIC";
+    }
+    return category;
   }
 }

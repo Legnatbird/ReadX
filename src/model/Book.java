@@ -8,7 +8,7 @@ import java.util.Calendar;
 public class Book extends Product {
 
   private String review;
-  private TGenre genre;
+  private TGender gender;
   private int soldCopies;
 
   /**
@@ -22,14 +22,14 @@ public class Book extends Product {
    * @param price      price of the book
    * @param image      image of the book
    * @param review     short review of the book
-   * @param genre      genre of the book
+   * @param gender      genre of the book
    * @param soldCopies number of sold copies
    */
   public Book(String id, String name, int pages, String date, int pagesRead, float price, String image, String review,
-      String genre, int soldCopies) {
+      String gender, int soldCopies) {
     super(id, name, pages, date, pagesRead, price, image);
     this.review = review;
-    this.genre = TGenre.valueOf(genre);
+    this.gender = TGender.valueOf(gender);
     this.soldCopies = soldCopies;
   }
 
@@ -150,8 +150,8 @@ public class Book extends Product {
    * 
    * @return genre TGenre
    */
-  public TGenre getGenre() {
-    return this.genre;
+  public String getGender() {
+    return this.gender.toString();
   }
 
   /**
@@ -160,8 +160,8 @@ public class Book extends Product {
    * 
    * @param genre genre of the book
    */
-  public void setGenre(String genre) {
-    this.genre = TGenre.valueOf(genre);
+  public void setGender(String gender) {
+    this.gender = TGender.valueOf(gender);
   }
 
   /**
@@ -251,21 +251,6 @@ public class Book extends Product {
    */
   @Override
   public String toString() {
-    String day = String.valueOf(date.get(Calendar.DAY_OF_MONTH));
-    String month = String.valueOf(date.get(Calendar.MONTH) + 1);
-    String year = String.valueOf(date.get(Calendar.YEAR));
-    String printDate = day + "/" + month + "/" + year;
-    return "Book{" +
-        "id='" + id + '\'' +
-        ", name='" + name + '\'' +
-        ", pages=" + pages +
-        ", review='" + review + '\'' +
-        ", date=" + printDate +
-        ", genre=" + genre +
-        ", image='" + image + '\'' +
-        ", price=" + price +
-        ", soldCopies=" + soldCopies +
-        ", pagesRead=" + pagesRead +
-        '}';
+    return "Gender: " + gender + "\n" + "Pages Read: " + pagesRead;
   }
 }
