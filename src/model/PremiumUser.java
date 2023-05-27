@@ -12,7 +12,8 @@ public class PremiumUser extends User {
   private String name;
   private String id;
   private Calendar registrationDate;
-  private final ArrayList<String> products = new ArrayList<>();
+  private final ArrayList<String> products = new ArrayList<>(25);
+  private int index = 0;
 
   /**
    * constructor of the premium user class
@@ -25,6 +26,9 @@ public class PremiumUser extends User {
     this.id = id;
     this.name = name;
     this.registrationDate = registrationDate;
+    for (int i = 0; i < 25; i++) {
+      this.products.add("");
+    }
   }
 
   /**
@@ -104,7 +108,13 @@ public class PremiumUser extends User {
    * @param productId products bought by the user
    */
   public void setProduct(String productId) {
-    this.products.add(productId);
+    if (this.products.size() % 25 == 0) {
+      for (int i = 0; i < 25; i++) {
+        this.products.add("");
+      }
+    }
+    this.products.set(index,productId);
+    index++;
   }
 
   /**
@@ -121,7 +131,6 @@ public class PremiumUser extends User {
     String date = day + "/" + month + "/" + year;
     return "name='" + name + '\'' +
         ", id='" + id + '\'' +
-        ", registrationDate=" + date +
-        ", products=" + products;
+        ", registrationDate=" + date;
   }
 }

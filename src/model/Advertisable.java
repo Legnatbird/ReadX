@@ -11,6 +11,6 @@ public interface Advertisable {
    * 
    * @return a string with the ad.
    */
-  public String showAds();
+ String showAds();
 
 }

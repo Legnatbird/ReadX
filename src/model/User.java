@@ -12,7 +12,7 @@ public abstract class User {
    * 
    * constructor of the user class
    */
-  public User() {};
+  public User() {}
 
   /**
    *

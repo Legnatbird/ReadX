@@ -1,6 +1,8 @@
 package ui;
 
 import model.ReadXController;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -342,24 +344,27 @@ public class ReadX {
           page--;
         }
         case "S" -> {
-          if (productSize <= page * 5) {
+          if (productSize <= page * 25) {
             print("You can't go forward");
             break;
           }
           page++;
         }
-        case "E" -> {
-          print("Exiting");
-          break;
-        }
+        case "B" -> print("Exiting");
         default -> {
           String name, productId;
           int pages, x, y, index;
           boolean ads;
-          if (!option.matches("/,/")) {
-            productId = option;
+          if (!option.matches("^\\d+,\\d+$")) {
+            ArrayList<String> products = controller.OrderByDate(userIndex);
+            index = products.indexOf(option.toLowerCase());
+            if (index == -1) {
+              print("Invalid option matches");
+              break;
+            }
+            productId = products.get(index);
             if (controller.getProduct(productId) == null) {
-              print("Product not found");
+              print("Product not found on the store");
               break;
             }
             name = controller.getProduct(productId).getName();
@@ -369,21 +374,20 @@ public class ReadX {
           }
           String[] coordinates = option.split(",");
           if (coordinates.length != 2) {
-            print("Invalid option");
             break;
           }
           x = Integer.parseInt(coordinates[0]);
           y = Integer.parseInt(coordinates[1]);
-          if (x < 1 || x > 5 || y < 1 || y > 5) {
-            print("Invalid option");
+          if (x < 0 || x > 4 || y < 0 || y > 4) {
+            print("Invalid option range");
             break;
           }
-          index = (page - 1) * 5 + (x - 1) * 5 - (y - 1);
+          index = (page - 1) * 5 + (x * 5) + (y);
           if (index >= productSize) {
-            print("Invalid option");
+            print("Invalid option index");
             break;
           }
-          productId = controller.getUser(userIndex).getProducts().get(index);
+          productId = controller.OrderByDate(userIndex).get(index);
           name = controller.getProduct(productId).getName();
           pages = controller.getProduct(productId).getPages();
           ads = false;
@@ -394,7 +398,7 @@ public class ReadX {
           ReadMenu(name, pages, ads, userIndex, productId);
         }
       }
-    } while (!option.equals("E"));
+    } while (!option.equals("B"));
   }
 
   /**
@@ -500,7 +504,6 @@ public class ReadX {
         case "B" -> {
           print("Reading session finished");
           controller.getBook(productId).setPagesRead(pagesRead);
-          break;
         }
       }
     } while (!option.equals("B"));

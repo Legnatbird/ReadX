@@ -1,7 +1,6 @@
 package model;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.Random;
 import utils.Utils;
@@ -171,6 +170,9 @@ public class ReadXController {
             if (product.getId().equals(bookId)) {
               user.setProduct(bookId);
               ((Book) product).setSoldCopies(((Book) product).getSoldCopies() + 1);
+              if (user instanceof RegularUser) {
+                ((RegularUser) user).setBookCount(((RegularUser) user).getBookCount() + 1);
+              }
               return "Book bought successfully";
             }
           }
@@ -303,16 +305,6 @@ public class ReadXController {
   }
 
   /**
-   * 
-   * This method return all the users
-   * 
-   * @return an ArrayList with all the users
-   */
-  public ArrayList<User> getUsers() {
-    return this.users;
-  }
-
-  /**
    *
    * This method return a product
    * 
@@ -348,24 +340,6 @@ public class ReadXController {
 
   /**
    * 
-   * This method return a magazine
-   * 
-   * @param magazineId id of the magazine
-   * @return the magazine
-   */
-  public Magazine getMagazine(String magazineId) {
-    for (Product product : products) {
-      if (product instanceof Magazine) {
-        if (product.getId().equals(magazineId)) {
-          return (Magazine) product;
-        }
-      }
-    }
-    return null;
-  }
-
-  /**
-   * 
    * This method return user index on the ArrayList
    * 
    * @param userId id of the user
@@ -384,7 +358,7 @@ public class ReadXController {
    * 
    * This method return a user by its index on the ArrayList
    * 
-   * @param userIndex
+   * @param userIndex index of the user on the ArrayList
    * @return the user
    */
   public User getUser(int userIndex) {
@@ -418,9 +392,13 @@ public class ReadXController {
       products.add(i, new Book(GenRandomHex(), "Book" + i, 100, "01/01/2000", 0, 10, "image", "review", "FANTASY", 0));
     }
     for (int i = 10; i < 20; i++) {
-      products.add(i, new Magazine("Magazine" + i, "Magazine" + i, 100, "01/01/2000", 0, 10, "image", "VARIETY", 0, 0));
+      products.add(i, new Magazine(GenRandomHex(), "Magazine" + i, 100, "01/01/2000", 0, 10, "image", "VARIETY", 0, 0));
     }
     users = Utils.getUsers();
+    for (int i = 0; i < 5; i++) {
+      BuyBook(users.get(0).getId(), products.get(i).getId());
+      SubscribeMagazine(users.get(0).getId(), products.get(i + 9).getId());
+    }
     return "Test elements generated successfully";
   }
 
@@ -448,7 +426,8 @@ public class ReadXController {
     StringBuilder result = new StringBuilder();
     for (Product product : products) {
       if (product instanceof Book) {
-        result.append(product.toString()).append("\n");
+        result.append(product).append("\n");
+        result.append("Id: ").append(product.getId());
       }
     }
     return result.toString();
@@ -459,6 +438,7 @@ public class ReadXController {
    * This method return all the products of the user
    * 
    * @param userId id of the user
+   * @param page   page of the products
    * @return a string with all the products of the user
    */
   public String ShowUserProducts(String userId, int page) {
@@ -473,25 +453,20 @@ public class ReadXController {
       return "Error: User has no products";
     }
 
-    ArrayList<String> products = user.getProducts();
+    ArrayList<String> products = OrderByDate(userIndex);
+
     int start = (page - 1) * 25;
     int end = page * 25;
-    int productSize = user.getProducts().size();
-
-    if (end > productSize) {
-      end = productSize;
-    }
 
     for (int i = start; i < end; i++) {
       if (i % 5 == 0) {
         result.append("\n");
       }
-      if (user.getProducts().get(i).equals("")) {
+      if (products.get(i) == null) {
         result.append("____").append(" | ");
       } else {
         result.append(products.get(i)).append(" | ");
       }
-      result.append(products.get(i)).append(" | ");
     }
     result.append("\n");
     result.append(
@@ -507,7 +482,7 @@ public class ReadXController {
 
   /**
    * 
-   * This methods return if the user can see the ads or not
+   * These methods return if the user can see the ads or not
    * 
    * @param userIndex index of the user on the ArrayList
    * @return true if the user can see the ads, false if not
@@ -526,7 +501,7 @@ public class ReadXController {
     StringBuilder result = new StringBuilder();
     for (Product product : products) {
       if (product instanceof Magazine) {
-        result.append(product.toString()).append("\n");
+        result.append(product).append("\n");
       }
     }
     return result.toString();
@@ -536,51 +511,37 @@ public class ReadXController {
    * 
    * This method order the products by its date
    * 
+   * @param userIndex index of the user on the ArrayList
    * @return arraylist with the products ordered by date
    */
-  public ArrayList<String> OrderByDate(String userId) {
-
-    int userIndex = getUser(userId);
+  public ArrayList<String> OrderByDate(int userIndex) {
     User user = users.get(userIndex);
     ArrayList<Product> userProducts = new ArrayList<>();
+
     for (String productId : user.getProducts()) {
       userProducts.add(getProduct(productId));
     }
-    Collections.sort(userProducts, new Comparator<Product>() {
-      @Override
-      public int compare(Product o1, Product o2) {
-        return o1.getDate().compareTo(o2.getDate());
-      }
+
+    userProducts.sort((o1, o2) -> {
+      if (o1 == null || o2 == null)
+        return 0;
+      return o1.getDate().compareTo(o2.getDate());
     });
 
-    ArrayList<String> userProductsId = new ArrayList<>();
+    ArrayList<String> userProductsId = new ArrayList<>(25);
+
     for (Product product : userProducts) {
-      userProductsId.add(product.getId());
+      if (product instanceof Book) {
+        userProductsId.add(product.getId());
+      }
+      if (product instanceof Magazine) {
+        userProductsId.add(product.getId());
+      }
+      if (product == null) {
+        userProductsId.add(null);
+      }
     }
     return userProductsId;
-  }
-
-  /**
-   * 
-   * This method create a String with the most readed product
-   * 
-   * @return a string with all the products ordered by most readed
-   */
-  public String MostReadedReport() {
-    StringBuilder result = new StringBuilder();
-    ArrayList<Product> productsPagesRead = OrderByPagesRead();
-
-    for (Product products : productsPagesRead) {
-      if (products instanceof Book) {
-        result.append(products.toString()).append("\n");
-        break;
-      }
-      if (products instanceof Magazine) {
-        result.append(products.toString()).append("\n");
-        break;
-      }
-    }
-    return result.toString();
   }
 
   /**
@@ -591,12 +552,7 @@ public class ReadXController {
    */
   private ArrayList<Product> OrderByPagesRead() {
     ArrayList<Product> productsCopy = new ArrayList<>(products);
-    Collections.sort(products, new Comparator<Product>() {
-      @Override
-      public int compare(Product p1, Product p2) {
-        return p2.getPagesRead() - p1.getPagesRead();
-      }
-    });
+    products.sort((p1, p2) -> p2.getPagesRead() - p1.getPagesRead());
     return productsCopy;
   }
 
@@ -609,7 +565,8 @@ public class ReadXController {
    */
   public String SummaryOfReadPages() {
     StringBuilder result = new StringBuilder();
-    ArrayList<Integer> pagesRead = new ArrayList<>(2);
+    ArrayList<Integer> pagesRead = new ArrayList<>(Collections.nCopies(2, 0));
+
     for (Product product : products) {
       if (product instanceof Book) {
         pagesRead.set(0, product.getPagesRead() + pagesRead.get(0));
@@ -626,16 +583,16 @@ public class ReadXController {
   /**
    * 
    * This method create a String with the genders of book most read and the
-   * categorys of magazine most readed
+   * category's of magazine most read
    * 
-   * @return String with the gender/category most readed
+   * @return String with the gender/category most read
    */
   public String BestGenderAndCategoryRead() {
     StringBuilder result = new StringBuilder();
 
     ArrayList<Product> productsPagesRead = OrderByPagesRead();
-    ArrayList<Integer> genders = new ArrayList<>(3);
-    ArrayList<Integer> categories = new ArrayList<>(3);
+    ArrayList<Integer> genders = new ArrayList<>(Collections.nCopies(3, 0));
+    ArrayList<Integer> categories = new ArrayList<>(Collections.nCopies(3, 0));
 
     for (Product product : productsPagesRead) {
       if (product instanceof Book) {
@@ -654,20 +611,20 @@ public class ReadXController {
       }
     }
 
-    int mostReadedGender = Collections.max(genders);
-    int mostReadedCategory = Collections.max(categories);
+    int mostReadGender = Collections.max(genders);
+    int mostReadCategory = Collections.max(categories);
 
-    result.append("The most readed genre is: " + GetGender(genders.indexOf(mostReadedGender)) + "with: "
-        + mostReadedGender + " pages readed\n");
-    result.append("The most readed category is: " + GetCategory(categories.indexOf(mostReadedCategory)) + "with: "
-        + mostReadedCategory + " pages readed\n");
+    result.append("The most read genre is: ").append(GetGender(genders.indexOf(mostReadGender))).append("with: ")
+        .append(mostReadGender).append(" pages read\n");
+    result.append("The most read category is: ").append(GetCategory(categories.indexOf(mostReadCategory)))
+        .append("with: ").append(mostReadCategory).append(" pages read\n");
 
     return result.toString();
   }
 
   /**
    * 
-   * This method create a String with the top 5 books and magazines readed
+   * This method create a String with the top 5 books and magazines read
    * 
    * @return String with the top
    */
@@ -685,7 +642,7 @@ public class ReadXController {
         break;
       }
       if (product instanceof Book) {
-        bookTop.append(product.toString()).append("\n");
+        bookTop.append(product).append("\n");
         i++;
       }
     }
@@ -695,12 +652,12 @@ public class ReadXController {
         break;
       }
       if (product instanceof Magazine) {
-        magazineTop.append(product.toString()).append("\n");
+        magazineTop.append(product).append("\n");
         k++;
       }
     }
 
-    return "Top 5 Books:\n" + bookTop.toString() + "\nTop 5 Magazines:\n" + magazineTop.toString();
+    return "Top 5 Books:\n" + bookTop + "\nTop 5 Magazines:\n" + magazineTop;
   }
 
   /**
@@ -712,22 +669,25 @@ public class ReadXController {
   public String SoldBooksByGender() {
 
     StringBuilder result = new StringBuilder();
-    ArrayList<Float> booksSold = new ArrayList<>(3);
-    ArrayList<Float> totalValue = new ArrayList<>(3);
+    ArrayList<Float> booksSold = new ArrayList<>(Collections.nCopies(3, .0f));
+    ArrayList<Float> totalValue = new ArrayList<>(Collections.nCopies(3, 0.f));
 
     for (Product product : products) {
+      if (!(product instanceof Book)) {
+        continue;
+      }
       String gender = ((Book) product).getGender();
       if (gender.equals("SCIENCE_FICTION")) {
-        booksSold.set(0, ((Book) product).getSoldCopies() + .0f);
-        totalValue.set(0, totalValue.get(0) + ((Book) product).getPrice());
+        booksSold.set(0, booksSold.get(0) + ((Book) product).getSoldCopies());
+        totalValue.set(0, totalValue.get(0) + product.getPrice());
       }
       if (gender.equals("FANTASY")) {
-        booksSold.set(1, ((Book) product).getSoldCopies() + .0f);
-        totalValue.set(1, totalValue.get(1) + ((Book) product).getPrice());
+        booksSold.set(1, booksSold.get(1) + ((Book) product).getSoldCopies());
+        totalValue.set(1, totalValue.get(1) + product.getPrice());
       }
       if (gender.equals("HISTORICAL")) {
-        booksSold.set(2, ((Book) product).getSoldCopies() + .0f);
-        totalValue.set(2, totalValue.get(2) + ((Book) product).getPrice());
+        booksSold.set(2, booksSold.get(2) + ((Book) product).getSoldCopies());
+        totalValue.set(2, totalValue.get(2) + product.getPrice());
       }
     }
 
@@ -750,22 +710,25 @@ public class ReadXController {
   public String ActiveSubsByCategory() {
 
     StringBuilder result = new StringBuilder();
-    ArrayList<Float> magazineSubs = new ArrayList<>(3);
-    ArrayList<Float> totalValue = new ArrayList<>(3);
+    ArrayList<Float> magazineSubs = new ArrayList<>(Collections.nCopies(3, .0f));
+    ArrayList<Float> totalValue = new ArrayList<>(Collections.nCopies(3, .0f));
 
     for (Product product : products) {
+      if (!(product instanceof Magazine)) {
+        continue;
+      }
       String category = ((Magazine) product).getCategory();
       if (category.equals("VARIETY")) {
-        magazineSubs.set(0, ((Magazine) product).getSubscriptions() + .0f);
-        totalValue.set(0, totalValue.get(0) + ((Magazine) product).getPrice());
+        magazineSubs.set(0, magazineSubs.get(0) + ((Magazine) product).getSubscriptions());
+        totalValue.set(0, totalValue.get(0) + product.getPrice());
       }
       if (category.equals("DESIGN")) {
-        magazineSubs.set(1, ((Magazine) product).getSubscriptions() + .0f);
-        totalValue.set(1, totalValue.get(1) + ((Magazine) product).getPrice());
+        magazineSubs.set(1, magazineSubs.get(1) + ((Magazine) product).getSubscriptions());
+        totalValue.set(1, totalValue.get(1) + product.getPrice());
       }
       if (category.equals("SCIENTIFIC")) {
-        magazineSubs.set(2, ((Magazine) product).getSubscriptions() + .0f);
-        totalValue.set(2, totalValue.get(2) + ((Magazine) product).getPrice());
+        magazineSubs.set(2, magazineSubs.get(2) + ((Magazine) product).getSubscriptions());
+        totalValue.set(2, totalValue.get(2) + product.getPrice());
       }
     }
 
@@ -793,7 +756,7 @@ public class ReadXController {
 
   /**
    * 
-   * This method get the name of the gender with a index
+   * This method get the name of the gender with an index
    * 
    * @param genderIndex index on the arraylist of genders
    * @return gender
@@ -810,7 +773,7 @@ public class ReadXController {
 
   /**
    * 
-   * This method get the name of the category with a index
+   * This method get the name of the category with an index
    * 
    * @param categoryIndex index on the arraylist of categories
    * @return category

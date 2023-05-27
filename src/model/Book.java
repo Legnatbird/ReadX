@@ -158,7 +158,7 @@ public class Book extends Product {
    *
    * setter for genre
    * 
-   * @param genre genre of the book
+   * @param gender genre of the book
    */
   public void setGender(String gender) {
     this.gender = TGender.valueOf(gender);

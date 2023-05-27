@@ -9,12 +9,13 @@ import java.util.Calendar;
  */
 public class RegularUser extends User implements Advertisable {
 
-  private final ArrayList<String> products = new ArrayList<>();
+  private final ArrayList<String> products = new ArrayList<>(25);
   private String id;
   private String name;
   private Calendar registrationDate;
   private int booksCount;
   private int magazineCount;
+  private int index = 0;
   private final String[] ads = {
       "Subscribe to Combo Plus and get Disney+ and Star+ at an incredible price!",
       "Now your pets have a favorite app: Laika. The best products for your furry friend.",
@@ -33,6 +34,9 @@ public class RegularUser extends User implements Advertisable {
     this.id = id;
     this.name = name;
     this.registrationDate = registrationDate;
+    for (int i = 0; i < 25; i++) {
+      this.products.add("");
+    }
   }
 
   /**
@@ -123,8 +127,8 @@ public class RegularUser extends User implements Advertisable {
    * @param productId products bought by the user
    */
   public void setProduct(String productId) {
-    this.products.add(productId);
-    setBookCount(getBookCount() + 1);
+    this.products.set(index ,productId);
+    index++;
   }
 
   /**
@@ -182,7 +186,6 @@ public class RegularUser extends User implements Advertisable {
     return "name='" + name + '\'' +
         ", id='" + id + '\'' +
         ", registrationDate=" + date +
-        ", products=" + products +
         ", booksCount=" + booksCount +
         ", magazineCount=" + magazineCount;
   }
